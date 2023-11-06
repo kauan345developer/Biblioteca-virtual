@@ -1,0 +1,49 @@
+@use '../../sass/colors.scss' as c;
+
+.container{
+  border: 1px solid red;
+  padding: .5rem .8rem 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .logo{
+    width: 6.55rem;
+    height: 6.55rem;
+  }
+
+  .search{
+    display: flex;
+
+    input{
+      height:2rem ;
+      width: 15rem;
+      border: 2px solid c.$first-color;
+      border-right:none;
+      border-radius: .3rem 0 0 .3rem;
+    }
+
+    button{
+      height: 2rem;
+      background-color: transparent;
+      border: 2px solid c.$first-color;
+      border-left:none;
+      width: 3rem;
+      border-radius: 0 .3rem .3rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      padding-right: .2rem;
+    }
+  }
+  
+  .loginButton{
+    border: none;
+    padding: .9rem;
+    border-radius: .3rem;
+    background-color: c.$first-color;
+    color: c.$third-color;
+    cursor: pointer;
+  }
+  
+}

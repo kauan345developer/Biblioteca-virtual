@@ -1,11 +1,11 @@
 @use '../../sass/colors.scss' as c;
 
 .container{
-  border: 1px solid red;
   padding: .5rem .8rem 0 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
   .logo{
     width: 6.55rem;
     height: 6.55rem;

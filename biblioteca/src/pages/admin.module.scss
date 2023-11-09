@@ -1,0 +1,62 @@
+/* admin.module.scss */
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  padding: 0 2rem;
+}
+
+.adminPanel {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-right: 4rem;
+  height: 20rem;
+
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: .2rem;
+
+    a{
+      text-decoration: none;
+    }
+
+    span {
+      // color: #0077cc;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #0055aa;
+      }
+    }
+  }
+}
+
+.content{
+  height: 20rem;
+  border: 1px solid black;
+}

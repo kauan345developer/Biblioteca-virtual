@@ -1,0 +1,39 @@
+/* styles.module.scss */
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 1rem;
+  label {
+    display: block;
+  }
+  
+  input[type="text"],
+  input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  button {
+    grid-column: span 2; /* Ocupa duas colunas */
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+    &:hover {
+      background-color: #0055aa;
+    }
+  }
+}
+

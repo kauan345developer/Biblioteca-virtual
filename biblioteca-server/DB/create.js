@@ -7,17 +7,6 @@ import {
     livros_generos,
 } from "./structure.js";
 
-function randomNumber(x, y) {
-    return Math.floor(Math.random() * (y - x + 1)) + x;
-}
-
-try {
-    await client.sync({ force: true });
-    console.log(`Tables criadas`);
-} catch (error) {
-    console.log(`Erro: ${error}`);
-}
-
 const biblioteca = {
     livros: [
         {
@@ -70,36 +59,68 @@ const biblioteca = {
                 },
             ],
         },
+        {
+            titulo: "A revolução dos bichos",
+            sinopse:
+                "Uma sátira política sobre a Revolução Russa e o regime stalinista.",
+            editora: "Editora ABC",
+            views: 30000,
+            autores: [
+                {
+                    nome: "George",
+                    sobrenome: "Orwell",
+                },
+            ],
+            generos: [
+                {
+                    nome: "Romance",
+                    descricao:
+                        "Narrativas centradas em relacionamentos interpessoais e emoções.",
+                },
+                {
+                    nome: "Mistério",
+                    descricao:
+                        "Enredos com elementos de suspense e resolução de enigmas.",
+                },
+            ],
+        },
     ],
 };
 
-let promiseAutores;
-let promiseGeneros;
-let promiseLivros;
-
 try {
-    await client
-        .sync({ force: true })
-        .then(async () => {
-            promiseLivros = biblioteca.livros.map(async (livro) => {
-                await livros.create(livro, {
-                    include: [generos, autores],
+    await client.sync({ force: true }).then(async () => {
+        biblioteca.livros.map(async (livro) => {
+            let generosLivro = livro.generos;
+            let autoresLivro = livro.autores;
+
+            const tmpGeneros = generosLivro.map(async (genero) => {
+                return await generos.findOrCreate({
+                    where: { nome: genero.nome },
                 });
             });
-        })
-        .then(async () => {
-            await Promise.all(promiseLivros);
 
-            // teste
-            await console.log(
-                (await livros.findAll({ include: [generos, autores] }))
-            );
+            const tmpAutores = autoresLivro.map(async (autor) => {
+                return await autores.findOrCreate({
+                    where: { nome: autor.nome, sobrenome: autor.sobrenome },
+                });
+            });
 
-            await client.close();
-        })
-        .then(async () => {
-            console.log(`Tables criadas`);
+            await livros
+                .create(livro, {})
+                .then(async (livroCriado) => {
+                    tmpGeneros.map(async (genero) => {
+                        await genero.then(async (genero) => {
+                            await livroCriado.addGenero(genero[0]);
+                        });
+                    });
+                    tmpAutores.map(async (autor) => {
+                        await autor.then(async (autor) => {
+                            await livroCriado.addAutore(autor[0]);
+                        });
+                    });
+                });
         });
+    });
 } catch (error) {
     console.log(`Erro: ${error}`);
 }

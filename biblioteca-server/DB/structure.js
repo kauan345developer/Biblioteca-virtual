@@ -47,13 +47,43 @@ const autores = client.define(
 
 const livros_generos = client.define(
     "livros_generos",
-    {},
+    {
+        livroId: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: livros,
+                key: "id",
+            },
+        },
+        generoId: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: generos,
+                key: "id",
+            },
+        },
+    },
     { timestamps: false }
 );
 
 const livros_autores = client.define(
     "livros_autores",
-    {},
+    {
+        livroId: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: livros,
+                key: "id",
+            },
+        },
+        autorId: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: autores,
+                key: "id",
+            },
+        },
+    },
     { timestamps: false }
 );
 

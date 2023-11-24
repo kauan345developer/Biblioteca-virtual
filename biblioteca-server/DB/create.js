@@ -26,6 +26,24 @@ const biblioteca = {
                 "Um cavaleiro idealista e seu fiel escudeiro embarcam em aventuras absurdas.",
             editora: "Editora ABC",
             views: 15000,
+            autores: [
+                {
+                    nome: "Miguel",
+                    sobrenome: "de Cervantes",
+                },
+            ],
+            generos: [
+                {
+                    nome: "Ficção Científica",
+                    descricao:
+                        "Exploração de conceitos científicos e tecnológicos em tramas imaginativas.",
+                },
+                {
+                    nome: "Fantasia",
+                    descricao:
+                        "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
+                },
+            ],
         },
         {
             titulo: "1984",
@@ -33,47 +51,24 @@ const biblioteca = {
                 "Um mundo distópico onde a vigilância governamental é onipresente.",
             editora: "Editora XYZ",
             views: 22000,
-        },
-    ],
-    generos: [
-        {
-            nome: "Ficção Científica",
-            descricao:
-                "Exploração de conceitos científicos e tecnológicos em tramas imaginativas.",
-        },
-        {
-            nome: "Fantasia",
-            descricao:
-                "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
-        },
-        {
-            nome: "Romance",
-            descricao:
-                "Narrativas centradas em relacionamentos interpessoais e emoções.",
-        },
-        {
-            nome: "Mistério",
-            descricao:
-                "Enredos com elementos de suspense e resolução de enigmas.",
-        },
-        {
-            nome: "Não Ficção",
-            descricao: "Baseado em fatos reais e informações factuais.",
-        },
-        {
-            nome: "Fábula",
-            descricao:
-                "Histórias curtas com lições morais, muitas vezes envolvendo animais antropomórficos.",
-        },
-    ],
-    autores: [
-        {
-            nome: "Miguel",
-            sobrenome: "de Cervantes",
-        },
-        {
-            nome: "George",
-            sobrenome: "Orwell",
+            autores: [
+                {
+                    nome: "George",
+                    sobrenome: "Orwell",
+                },
+            ],
+            generos: [
+                {
+                    nome: "Romance",
+                    descricao:
+                        "Narrativas centradas em relacionamentos interpessoais e emoções.",
+                },
+                {
+                    nome: "Mistério",
+                    descricao:
+                        "Enredos com elementos de suspense e resolução de enigmas.",
+                },
+            ],
         },
     ],
 };
@@ -83,34 +78,28 @@ let promiseGeneros;
 let promiseLivros;
 
 try {
-    await client.sync({ force: true })
-    .then(async () => {
-        promiseAutores = biblioteca.autores.map(async (autor) => {
-            await autores.create(autor);
-        });
-        promiseGeneros = biblioteca.generos.map(async (genero) => {
-            await generos.create(genero);
-        });
-        promiseLivros = biblioteca.livros.map(async (livro) => {
-            await livros.create(livro, {
-                include: [generos, autores],
+    await client
+        .sync({ force: true })
+        .then(async () => {
+            promiseLivros = biblioteca.livros.map(async (livro) => {
+                await livros.create(livro, {
+                    include: [generos, autores],
+                });
             });
+        })
+        .then(async () => {
+            await Promise.all(promiseLivros);
 
+            // teste
+            await console.log(
+                (await livros.findAll({ include: [generos, autores] }))
+            );
+
+            await client.close();
+        })
+        .then(async () => {
+            console.log(`Tables criadas`);
         });
-    })
-    .then(async () => {
-        await Promise.all(promiseAutores);
-        await Promise.all(promiseGeneros);
-        await Promise.all(promiseLivros);
-
-        // teste
-        await console.log(await livros.findAll({include: [generos, autores]}));
-
-        await client.close();
-    })
-    .then(async () => {
-        console.log(`Tables criadas`);
-    });
 } catch (error) {
     console.log(`Erro: ${error}`);
 }

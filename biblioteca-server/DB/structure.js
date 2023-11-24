@@ -62,6 +62,6 @@ livros.belongsToMany(generos, { through: livros_generos });
 generos.belongsToMany(livros, { through: livros_generos });
 
 livros.belongsToMany(autores, { through: livros_autores });
-autores.belongsToMany(livros, { through: livros_autores });
+autores.belongsToMany(livros, { through: livros_autores, foreignKey: 'autorId' });
 
 export { livros, generos, autores, livros_generos, livros_autores };

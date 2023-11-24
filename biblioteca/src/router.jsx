@@ -9,6 +9,7 @@ import { ViewBook } from "./pages/crud/ViewBook";
 import { UpdateBook } from "./pages/crud/UpdateBook";
 import { BookShelf } from "./pages/crud/BookShelf";
 import { Reading } from "./pages/readingPage";
+import { Login } from "./pages/Login";
 const router  = createBrowserRouter([
   {
     path: "/",
@@ -46,6 +47,9 @@ const router  = createBrowserRouter([
         path:"bookshelf",element:<BookShelf/>
       }
     ]
+  },{
+    path:"login",
+    element:<Login/>
   }
 ])
 

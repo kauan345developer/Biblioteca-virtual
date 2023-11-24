@@ -29,56 +29,56 @@ function BookList(props) {
       <div className={styles.books}>
         <Slider {...settings}>
 
-          <Link to = "/book">
+          <Link to='/book/1'>
           <div>
               <img src={img1} alt="" />
             </div>
           </Link>
 
-          <Link to = "/book">
+          <Link to = "/book/2">
           <div>
               <img src={img1} alt="" />
             </div>
           </Link>
 
-          <Link to = "/book">
+          <Link to = "/book/3">
           <div>
               <img src={img1} alt="" />
             </div>
           </Link>
 
-          <Link to = "/book">
+          <Link to = "/book/4">
           <div>
               <img src={img1} alt="" />
             </div>
           </Link>
 
-            <Link to = "/book">
+            <Link to = "/book/5">
           <div>
               <img src={img1} alt="" />
             </div>
           </Link>
-          <Link to = "/book">
+          <Link to = "/book/6">
           <div>
               <img src={img1} alt="" />
             </div>
           </Link>
-          <Link to = "/book">
+          <Link to = "/book/7">
           <div>
               <img src={img1} alt="" />
             </div>
           </Link>
-          <Link to = "/book">
+          <Link to = "/book/8">
           <div>
               <img src={img1} alt="" />
             </div>
           </Link>
-          <Link to = "/book">
+          <Link to = "/book/9">
           <div>
               <img src={img1} alt="" />
             </div>
           </Link>
-          <Link to = "/book">
+          <Link to = "/book/10">
           <div>
               <img src={img1} alt="" />
             </div>

@@ -1,12 +1,13 @@
 import { RouterProvider } from "react-router-dom"
 import router from "./router.jsx"
+import { StockContextBookProvider } from "./contexts/StockBookContext.jsx"
 
 function App() {
 
   return (
-    <>
-    <RouterProvider router={router} />
-    </>
+      <StockContextBookProvider>
+        <RouterProvider router={router} />
+      </StockContextBookProvider>
   )
 }
 

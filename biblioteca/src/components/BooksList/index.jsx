@@ -7,7 +7,9 @@ import styles from "./styles.module.scss"
 import "./slickCustom.css"
 // import { BookPage } from "../../pages/bookPage";
 import { Link } from 'react-router-dom';
-
+import { useContext } from "react";
+import { StockContext } from "../../contexts/StockBookContext";
+import img1 from "../../assets/bookCover/livro1.png"
 
 function BookList(props) {
   const settings = {
@@ -19,6 +21,7 @@ function BookList(props) {
   };
 
 
+  // const Livro1 = useContext(StockContext)
 
   return (
     <div className={styles.container}>
@@ -28,85 +31,58 @@ function BookList(props) {
 
           <Link to = "/book">
           <div>
-              <img src={props.Livro1} alt="" />
+              <img src={img1} alt="" />
+            </div>
+          </Link>
+
+          <Link to = "/book">
+          <div>
+              <img src={img1} alt="" />
+            </div>
+          </Link>
+
+          <Link to = "/book">
+          <div>
+              <img src={img1} alt="" />
+            </div>
+          </Link>
+
+          <Link to = "/book">
+          <div>
+              <img src={img1} alt="" />
+            </div>
+          </Link>
+
+            <Link to = "/book">
+          <div>
+              <img src={img1} alt="" />
             </div>
           </Link>
           <Link to = "/book">
           <div>
-              <img src={props.Livro1} alt="" />
+              <img src={img1} alt="" />
             </div>
           </Link>
           <Link to = "/book">
           <div>
-              <img src={props.Livro1} alt="" />
+              <img src={img1} alt="" />
             </div>
           </Link>
           <Link to = "/book">
           <div>
-              <img src={props.Livro1} alt="" />
+              <img src={img1} alt="" />
             </div>
           </Link>
           <Link to = "/book">
           <div>
-              <img src={props.Livro1} alt="" />
+              <img src={img1} alt="" />
             </div>
           </Link>
           <Link to = "/book">
           <div>
-              <img src={props.Livro1} alt="" />
+              <img src={img1} alt="" />
             </div>
-          </Link>
-          <Link to = "/book">
-          <div>
-              <img src={props.Livro1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book">
-          <div>
-              <img src={props.Livro1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book">
-          <div>
-              <img src={props.Livro1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book">
-          <div>
-              <img src={props.Livro1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book">
-          <div>
-              <img src={props.Livro1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book">
-          <div>
-              <img src={props.Livro1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book">
-          <div>
-              <img src={props.Livro1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book">
-          <div>
-              <img src={props.Livro1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book">
-          <div>
-              <img src={props.Livro1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book">
-          <div>
-              <img src={props.Livro1} alt="" />
-            </div>
-          </Link>
-          
+          </Link>          
         </Slider>
       </div>
     </div>

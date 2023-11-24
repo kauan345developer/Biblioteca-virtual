@@ -1,5 +1,0 @@
-function ViewBook() {
-  
-}
-
-export {ViewBook}

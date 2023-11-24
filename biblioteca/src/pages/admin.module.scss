@@ -3,8 +3,15 @@
 .container {
   display: flex;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   padding: 0 2rem;
+  
+}
+
+.containerAdmin{
+  display: flex;
+  // border: 1px solid red;
+  align-items: center;
 }
 
 .adminPanel {
@@ -57,6 +64,6 @@
 }
 
 .content{
-  height: 20rem;
-  border: 1px solid black;
+  height: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

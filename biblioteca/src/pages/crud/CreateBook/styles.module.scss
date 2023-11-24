@@ -2,7 +2,8 @@
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3,20rem);
+  // grid-template-rows: repeat(3,1fr);
   grid-gap: 10px;
   margin: 0 auto;
   height: 100%;
@@ -13,17 +14,27 @@
   
   input[type="text"],
   input[type="file"] {
-    width: 100%;
+    width: 20rem;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
   }
   
+
+  textarea{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    padding: .1rem;
+    grid-column: span 3;
+  }
+
   button {
-    grid-column: span 2; /* Ocupa duas colunas */
+    grid-column: span 3; /* Ocupa duas colunas */
     margin-top: 10px;
     padding: 10px;
+    height: 3rem;
     background-color: #0077cc;
     color: #fff;
     border: none;

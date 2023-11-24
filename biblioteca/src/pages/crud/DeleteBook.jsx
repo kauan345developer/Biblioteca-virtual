@@ -1,5 +1,0 @@
-function DeleteBook() {
-  
-}
-
-export {DeleteBook}

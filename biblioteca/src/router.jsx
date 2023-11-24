@@ -7,6 +7,8 @@ import { CreateBook } from "./pages/crud/CreateBook";
 import { DeleteBook } from "./pages/crud/DeleteBook";
 import { ViewBook } from "./pages/crud/ViewBook";
 import { UpdateBook } from "./pages/crud/UpdateBook";
+import { BookShelf } from "./pages/crud/BookShelf";
+import { Reading } from "./pages/readingPage";
 const router  = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +21,9 @@ const router  = createBrowserRouter([
       {
         path:"book",
         element:<BookPage />
+      },{
+        path:"book/reading",
+        element:<Reading />
       }
   ]
   },{
@@ -36,6 +41,9 @@ const router  = createBrowserRouter([
       },
       {
         path:"update",element:<UpdateBook/>
+      },
+      {
+        path:"bookshelf",element:<BookShelf/>
       }
     ]
   }

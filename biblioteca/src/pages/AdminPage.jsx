@@ -6,25 +6,30 @@ import styles from './admin.module.scss'; // Importe os estilos SCSS Modules
 function Admin() {
   return (
     <div className={styles.container}>
-      <div className={styles.adminPanel}>
-        <div>
-          <img src={user} alt="" />
+      <div className = {styles.containerAdmin}>
+        <div className={styles.adminPanel}>
+          <div>
+            <img src={user} alt="" />
+          </div>
+          <span>Nome</span>
+          <nav>
+            <Link to="">
+              <span>Create BooK</span>
+            </Link>
+            <Link to="del">
+              <span>Delete BooK</span>
+            </Link>
+            <Link to="view">
+              <span>View BooK</span>
+            </Link>
+            <Link to="bookshelf">
+              <span>Book Shelf</span>
+            </Link>
+          </nav>
         </div>
-        <span>Nome</span>
-        <nav>
-          <Link to="">
-            <span>Create BooK</span>
-          </Link>
-          <Link to="del">
-            <span>Delete BooK</span>
-          </Link>
-          <Link to="view">
-            <span>View BooK</span>
-          </Link>
-        </nav>
-      </div>
-      <div className={styles.content}>
-        <Outlet />
+        <div className={styles.content}>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

@@ -3,9 +3,15 @@ import {
     livros,
     generos,
     autores,
+    usuarios,
     livros_autores,
     livros_generos,
+    usuarios_livros,
 } from "./structure.js";
+
+function randomNumber(x, y) {
+    return Math.floor(Math.random() * y) + x;
+}
 
 const biblioteca = {
     livros: [
@@ -85,44 +91,71 @@ const biblioteca = {
             ],
         },
     ],
+    usuarios: [
+        {
+            nome: "João",
+            email: "joao@gmail.com",
+            senha: "joao123",
+        },
+        {
+            nome: "Maria",
+            email: "maria@gmail.com",
+            senha: "maria123",
+        },
+        {
+            nome: "José",
+            email: "jose@gmail.com",
+            senha: "jose123",
+        },
+    ],
 };
 
 try {
-    await client.sync({ force: true }).then(async () => {
-        biblioteca.livros.map(async (livro) => {
-            let generosLivro = livro.generos;
-            let autoresLivro = livro.autores;
+    await client
+        .sync({ force: true })
+        .then(async () => {
+            biblioteca.livros.map(async (livro) => {
+                let generosLivro = livro.generos;
+                let autoresLivro = livro.autores;
 
-            const tmpGeneros = generosLivro.map(async (genero) => {
-                return await generos.findOrCreate({
-                    where: { nome: genero.nome },
-                });
-            });
-
-            const tmpAutores = autoresLivro.map(async (autor) => {
-                return await autores.findOrCreate({
-                    where: { nome: autor.nome, sobrenome: autor.sobrenome },
-                });
-            });
-
-            await livros
-                .create(livro, {})
-                .then(async (livroCriado) => {
-                    tmpGeneros.map(async (genero) => {
-                        await genero.then(async (genero) => {
-                            await livroCriado.addGenero(genero[0]);
-                        });
-                    });
-                    tmpAutores.map(async (autor) => {
-                        await autor.then(async (autor) => {
-                            await livroCriado.addAutore(autor[0]);
-                        });
+                generosLivro.map(async (genero) => {
+                    return await generos.findOrCreate({
+                        where: {
+                            nome: genero.nome,
+                            descricao: genero.descricao,
+                        },
                     });
                 });
-        });
-    });
+
+                autoresLivro.map(async (autor) => {
+                    return await autores.findOrCreate({
+                        where: { nome: autor.nome, sobrenome: autor.sobrenome },
+                    });
+                });
+
+                await livros.create(livro, {}).then(async (livroCriado) => {
+                    generosLivro.map(async (genero) => {
+                        await livroCriado.addGenero(genero[0]);
+                    });
+                    autoresLivro.map(async (autor) => {
+                        await livroCriado.addAutore(autor[0]);
+                    });
+                });
+            });
+        })
+        .then(async () => {
+            biblioteca.usuarios.map(async (usuario) => {
+                await usuarios
+                    .create(usuario, {})
+                    .then(async (usuarioCriado) => {
+                        await usuarioCriado.addLivro(
+                            await livros.findOne({
+                                where: { id: randomNumber(1, 3) },
+                            })
+                        );
+                    });
+            });
+        })
 } catch (error) {
     console.log(`Erro: ${error}`);
 }
-
-export { livros, generos, autores, livros_autores, livros_generos };

@@ -45,6 +45,22 @@ const autores = client.define(
     { timestamps: false }
 );
 
+const usuarios = client.define(
+    "usuarios",
+    {
+        nome: {
+            type: Sequelize.STRING,
+        },
+        email: {
+            type: Sequelize.STRING,
+        },
+        senha: {
+            type: Sequelize.STRING,
+        },
+    },
+    { timestamps: false }
+);
+
 const livros_generos = client.define(
     "livros_generos",
     {
@@ -87,11 +103,46 @@ const livros_autores = client.define(
     { timestamps: false }
 );
 
+const usuarios_livros = client.define(
+    "usuarios_livros",
+    {
+        usuarioId: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: usuarios,
+                key: "id",
+            },
+        },
+        livroId: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: livros,
+                key: "id",
+            },
+        },
+    },
+    { timestamps: false }
+);
+
 // relações
 livros.belongsToMany(generos, { through: livros_generos });
 generos.belongsToMany(livros, { through: livros_generos });
 
 livros.belongsToMany(autores, { through: livros_autores });
-autores.belongsToMany(livros, { through: livros_autores, foreignKey: 'autorId' });
+autores.belongsToMany(livros, {
+    through: livros_autores,
+    foreignKey: "autorId",
+});
 
-export { livros, generos, autores, livros_generos, livros_autores };
+livros.belongsToMany(usuarios, { through: usuarios_livros });
+usuarios.belongsToMany(livros, { through: usuarios_livros });
+
+export {
+    livros,
+    generos,
+    autores,
+    usuarios,
+    livros_generos,
+    livros_autores,
+    usuarios_livros,
+};

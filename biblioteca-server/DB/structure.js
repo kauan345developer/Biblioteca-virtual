@@ -38,6 +38,9 @@ const autores = client.define(
         nome: {
             type: Sequelize.STRING,
         },
+        sobrenome: {
+            type: Sequelize.STRING,
+        }
     },
     { timestamps: false }
 );

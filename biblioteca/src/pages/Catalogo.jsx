@@ -3,8 +3,8 @@ import { useContext } from "react";
 import { StockContext } from "../contexts/StockBookContext";
 import styles from "./catalogo.module.scss"
 
-
 function Catalogo() {
+
   const { bookItems } = useContext(StockContext);
   return (
     <div className={styles.container}>

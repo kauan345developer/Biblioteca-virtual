@@ -23,8 +23,7 @@ const biblioteca = {
             views: 15000,
             autores: [
                 {
-                    nome: "Miguel",
-                    sobrenome: "de Cervantes",
+                    nome: "Miguel de Cervantes",
                 },
             ],
             generos: [
@@ -48,8 +47,7 @@ const biblioteca = {
             views: 22000,
             autores: [
                 {
-                    nome: "George",
-                    sobrenome: "Orwell",
+                    nome: "George Orwell",
                 },
             ],
             generos: [
@@ -73,8 +71,7 @@ const biblioteca = {
             views: 30000,
             autores: [
                 {
-                    nome: "George",
-                    sobrenome: "Orwell",
+                    nome: "George Orwell",
                 },
             ],
             generos: [
@@ -111,51 +108,25 @@ const biblioteca = {
 };
 
 try {
-    await client
-        .sync({ force: true })
-        .then(async () => {
-            biblioteca.livros.map(async (livro) => {
-                let generosLivro = livro.generos;
-                let autoresLivro = livro.autores;
+    await client.sync({ force: true });
+    for (const livro of biblioteca.livros) {
+        const createdLivro = await livros.create(livro);
 
-                generosLivro.map(async (genero) => {
-                    return await generos.findOrCreate({
-                        where: {
-                            nome: genero.nome,
-                            descricao: genero.descricao,
-                        },
-                    });
-                });
-
-                autoresLivro.map(async (autor) => {
-                    return await autores.findOrCreate({
-                        where: { nome: autor.nome, sobrenome: autor.sobrenome },
-                    });
-                });
-
-                await livros.create(livro, {}).then(async (livroCriado) => {
-                    generosLivro.map(async (genero) => {
-                        await livroCriado.addGenero(genero[0]);
-                    });
-                    autoresLivro.map(async (autor) => {
-                        await livroCriado.addAutore(autor[0]);
-                    });
-                });
+        for (const autor of livro.autores) {
+            const [createdAutor, boolean] = await autores.findOrCreate({
+                where: { nome: autor.nome },
             });
-        })
-        .then(async () => {
-            biblioteca.usuarios.map(async (usuario) => {
-                await usuarios
-                    .create(usuario, {})
-                    .then(async (usuarioCriado) => {
-                        await usuarioCriado.addLivro(
-                            await livros.findOne({
-                                where: { id: randomNumber(1, 3) },
-                            })
-                        );
-                    });
+            await createdLivro.addAutores(createdAutor);
+        }
+
+        for (const genero of livro.generos) {
+            const [createdGenero, boolean] = await generos.findOrCreate({
+                where: { nome: genero.nome, descricao: genero.descricao },
             });
-        })
+            await createdLivro.addGeneros(createdGenero);
+        }
+    }
+    await client.close();
 } catch (error) {
-    console.log(`Erro: ${error}`);
+    console.log(error);
 }

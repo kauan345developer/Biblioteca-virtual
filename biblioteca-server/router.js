@@ -1,6 +1,11 @@
 import express, { json } from "express";
 import cors from "cors";
-import { getAllBooks, getBookById, getBookByName, incrementView } from "./DB/functions.js";
+import {
+    getAllBooks,
+    getBookById,
+    getBookByName,
+    incrementView,
+} from "./DB/functions.js";
 import { error } from "console";
 import { Sequelize } from "sequelize";
 

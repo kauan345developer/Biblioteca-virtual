@@ -57,6 +57,9 @@ app.get("/api/products/incrementView/:id", async (req, res) => {
     }
 });
 
+// fornecendo imagens
+app.use("/api/books/capas", express.static("./public/livrosCapas"));
+
 try {
     app.listen(3000);
     console.log("Server running on port 3000");

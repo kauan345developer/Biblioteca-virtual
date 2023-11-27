@@ -4,13 +4,13 @@ const livros = client.define(
     "livros",
     {
         titulo: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
         },
         sinopse: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
         },
         editora: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
         },
         views: {
             type: Sequelize.INTEGER,
@@ -23,10 +23,10 @@ const generos = client.define(
     "generos",
     {
         nome: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
         },
         descricao: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
         },
     },
     { timestamps: false }
@@ -36,10 +36,10 @@ const autores = client.define(
     "autores",
     {
         nome: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
         },
         sobrenome: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
         }
     },
     { timestamps: false }
@@ -49,13 +49,14 @@ const usuarios = client.define(
     "usuarios",
     {
         nome: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
         },
         email: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
+            unique: true,
         },
         senha: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
         },
     },
     { timestamps: false }

@@ -707,6 +707,81 @@ const biblioteca = {
                 },
             ],
         },
+        {
+            titulo: "De Onde Vem o Frio (Estações Vol. 1)",
+            sinopse:
+                "De Onde Vem o Frio não é uma história sobre hockey. É sobre descobertas, amor, sobre preconceito, sobre se sentir em casa mesmo quando se está a quilômetros de distância.",
+            editora: "Editora ABC",
+            views: 15000,
+            autores: [
+                {
+                    nome: "Beatriz",
+                    sobrenome: "Garcia",
+                },
+            ],
+            generos: [
+                {
+                    nome: "Ficção Científica",
+                    descricao:
+                        "Exploração de conceitos científicos e tecnológicos em tramas imaginativas.",
+                },
+                {
+                    nome: "Romance",
+                    descricao:
+                        "Narrativas centradas em relacionamentos interpessoais e emoções.",
+                },
+            ],
+        },
+        {
+            titulo: "O enigma dos dados",
+            sinopse:
+                "Prepare-se para conhecer um mundo de enigmas e encantamentos... Isaac Samus tem uma louvável habilidade com números. Aos treze anos, ele foi capaz de desvendar a enigmática mensagem do grande matemático Euclides e isso lhe permitiu possuir a moeda de ouro de Enigma e os Dados de Euclides, um dos sete lendários Objetos de Poder. Com a moeda e os dados, Isaac é capaz de prever o futuro, mas isso não é o bastante para prepará-lo para a jornada em busca do segundo Objeto de Poder: o Cubo de Random.",
+            editora: "Principis",
+            views: 15000,
+            autores: [
+                {
+                    nome: "Marcos",
+                    sobrenome: "Mota",
+                },
+            ],
+            generos: [
+                {
+                    nome: "Ficção Científica",
+                    descricao:
+                        "Exploração de conceitos científicos e tecnológicos em tramas imaginativas.",
+                },
+                {
+                    nome: "Fantasia",
+                    descricao:
+                        "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
+                },
+            ],
+        },
+        {
+            titulo: "Coroa de sombras",
+            sinopse:
+                "Se prepare para mergulhar nas intrigas da corte (e do coração) neste enemies to lovers que conquistou o TikTok. Alessandra Stathos está cansada de ser subestimada, mas ela tem o plano perfeito para conquistar mais poder:",
+            editora: "Planeta Minotauro",
+            views: 15000,
+            autores: [
+                {
+                    nome: "Tricia",
+                    sobrenome: "Levenseller",
+                },
+            ],
+            generos: [
+                {
+                    nome: "Ficção Científica",
+                    descricao:
+                        "Exploração de conceitos científicos e tecnológicos em tramas imaginativas.",
+                },
+                {
+                    nome: "Fantasia",
+                    descricao:
+                        "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
+                },
+            ],
+        },
     ],
     usuarios: [
         {

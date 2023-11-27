@@ -58,7 +58,10 @@ app.get("/api/products/incrementView/:id", async (req, res) => {
 });
 
 // fornecendo imagens
-app.use("/api/books/capas", express.static("./public/livrosCapas"));
+app.use("/api/books/capas", express.static("./public/livros/capas"));
+
+// fornecendo os arquivos epub
+app.use("/api/books/read", express.static("./public/livros/epubs"));
 
 try {
     app.listen(3000);

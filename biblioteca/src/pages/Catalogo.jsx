@@ -2,6 +2,14 @@
 import { useContext } from "react";
 import { StockContext } from "../contexts/StockBookContext";
 import styles from "./catalogo.module.scss"
+// import { getAllBooks } from "../apis/api.js";
+
+
+// async function all(){
+  
+//   console.log( await getAllBooks())
+// }
+// all()
 
 function Catalogo() {
 

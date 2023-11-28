@@ -7,10 +7,9 @@ import styles from "./styles.module.scss"
 import "./slickCustom.css"
 // import { BookPage } from "../../pages/bookPage";
 import { Link } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext,useState,useEffect } from "react";
 import { StockContext } from "../../contexts/StockBookContext";
 import img1 from "../../assets/bookCover/livro1.png"
-
 function BookList(props) {
   const settings = {
     dots: false,
@@ -22,6 +21,9 @@ function BookList(props) {
 
 
   // const Livro1 = useContext(StockContext)
+  const {bookItems} = useContext(StockContext)
+
+
 
   return (
     <div className={styles.container}>
@@ -29,60 +31,36 @@ function BookList(props) {
       <div className={styles.books}>
         <Slider {...settings}>
 
-          <Link to='/book/1'>
-          <div>
-              <img src={img1} alt="" />
-            </div>
-          </Link>
+          {bookItems.map((book)=>{
 
-          <Link to = "/book/2">
-          <div>
-              <img src={img1} alt="" />
-            </div>
-          </Link>
+const MeuComponente = () => {
+  const [caminhoDaImagem, setCaminhoDaImagem] = useState(null);
 
-          <Link to = "/book/3">
-          <div>
-              <img src={img1} alt="" />
-            </div>
-          </Link>
+  useEffect(() => {
+    import(`../../../../biblioteca-server/public/livros/capas/${book.id}.png`)
+      .then((image) => {
+        setCaminhoDaImagem(image.default);
+      })
+      .catch((error) => {
+        console.error(`Error loading image: ${error}`);
+      });
+  },);
 
-          <Link to = "/book/4">
-          <div>
-              <img src={img1} alt="" />
-            </div>
-          </Link>
+  if (!caminhoDaImagem) {
+    return null; // or return a placeholder image
+  }
 
-            <Link to = "/book/5">
-          <div>
-              <img src={img1} alt="" />
+  return <img src={caminhoDaImagem} alt="Descrição da imagem" />;
+};
+
+            return(
+          <Link to={`/book/${book.id}`} key={book.id} >
+            <div className={styles.divImgs}>
+              <MeuComponente/>
             </div>
           </Link>
-          <Link to = "/book/6">
-          <div>
-              <img src={img1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book/7">
-          <div>
-              <img src={img1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book/8">
-          <div>
-              <img src={img1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book/9">
-          <div>
-              <img src={img1} alt="" />
-            </div>
-          </Link>
-          <Link to = "/book/10">
-          <div>
-              <img src={img1} alt="" />
-            </div>
-          </Link>          
+            )
+          })}
         </Slider>
       </div>
     </div>

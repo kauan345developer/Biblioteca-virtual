@@ -10,6 +10,9 @@ import { UpdateBook } from "./pages/crud/UpdateBook";
 import { BookShelf } from "./pages/crud/BookShelf";
 import { Reading } from "./pages/readingPage";
 import { Login } from "./pages/Login";
+import { Cadastro } from "./pages/Cadastro";
+import { Catalogo } from "./pages/Catalogo";
+
 const router  = createBrowserRouter([
   {
     path: "/",
@@ -23,8 +26,11 @@ const router  = createBrowserRouter([
         path:"book/:id",
         element:<BookPage />
       },{
-        path:"book/reading",
+        path:"book/:id/reading",
         element:<Reading />
+      },{
+        path:"catalogo",
+        element:<Catalogo/>
       }
   ]
   },{
@@ -50,6 +56,9 @@ const router  = createBrowserRouter([
   },{
     path:"login",
     element:<Login/>
+  },{
+    path:"cadastro",
+    element:<Cadastro/>
   }
 ])
 

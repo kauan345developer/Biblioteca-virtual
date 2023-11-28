@@ -5,6 +5,8 @@ import {
     getBookById,
     getBookByName,
     incrementView,
+    addBookToUser,
+    getAllBooksFromUser,
 } from "./DB/functions.js";
 import { error } from "console";
 import { Sequelize } from "sequelize";
@@ -47,7 +49,7 @@ app.get("/api/books/searchByName/:name", async (req, res) => {
     });
 });
 
-app.get("/api/products/incrementView/:id", async (req, res) => {
+app.get("/api/books/incrementView/:id", async (req, res) => {
     const id = parseInt(req.params.id);
     try {
         await incrementView(id);
@@ -57,6 +59,30 @@ app.get("/api/products/incrementView/:id", async (req, res) => {
     }
 });
 
+// auth ----------------------------------
+app.get("/api/auth/getAllBooksFromUser/:userId", async (req, res) => {
+    const { userId } = req.params;
+    try {
+        await getAllBooksFromUser(userId).then((query) => {
+            res.status(200).send(query);
+        });
+    } catch {
+        console.log(error);
+    }
+});
+
+app.post("/api/auth/addBookToUser/:bookId/:userId", async (req, res) => {
+    const { bookId, userId } = req.params;
+    try {
+        await addBookToUser(bookId, userId);
+        res.status(200).send();
+    } catch {
+        console.log(error);
+    }
+});
+
+
+
 // fornecendo imagens
 app.use("/api/books/capas", express.static("./public/livros/capas"));
 
@@ -65,7 +91,7 @@ app.use("/api/books/read", express.static("./public/livros/epubs"));
 
 try {
     app.listen(3000);
-    console.log("Server running on port 3000");
+    console.log("Server running on port 3000\nhttp://localhost:3000");
 } catch {
     console.log("Error on server");
 }

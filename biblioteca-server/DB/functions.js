@@ -45,11 +45,16 @@ async function getMostSoldBooks(limit) {
 }
 
 async function activateBook(id) {
-    livros.update({ ativo: true }, { where: { id: id } });
+    livros.update({ disponivel: true }, { where: { id: id } });
 }
 
 async function deactivateBook(id) {
-    livros.update({ ativo: false }, { where: { id: id } });
+    livros.update({ disponivel: false }, { where: { id: id } });
+}
+
+async function deleteBook(id) {
+    livros.destroy({ where: { id: id } });
+    usuarios_livros.destroy({ where: { livroId: id } });
 }
 
 // relacionados a usuario
@@ -112,6 +117,8 @@ export {
     getBookById,
     getMostSoldBooks,
     activateBook,
+    deactivateBook,
+    deleteBook,
     incrementView,
     getBookByName,
     addBookToUser,

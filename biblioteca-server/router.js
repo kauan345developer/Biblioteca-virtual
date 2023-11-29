@@ -6,6 +6,9 @@ import {
     getBookByName,
     getMostSoldBooks,
     incrementView,
+    activateBook,
+    deactivateBook,
+    deleteBook,
     addBookToUser,
     getAllBooksFromUser,
     createUser,
@@ -70,6 +73,36 @@ app.get("/api/books/incrementView/:id", async (req, res) => {
     try {
         await incrementView(id);
         res.status(200).send("ok");
+    } catch {
+        console.log(error);
+    }
+});
+
+app.post("/api/books/activate/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    try {
+        await activateBook(id);
+        res.status(200).send(`Livro ${id} ativado`);
+    } catch {
+        console.log(error);
+    }
+});
+
+app.post("/api/books/deactivate/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    try {
+        await deactivateBook(id);
+        res.status(200).send(`Livro ${id} desativado`);
+    } catch {
+        console.log(error);
+    }
+});
+
+app.delete("/api/books/delete/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    try {
+        await deleteBook(id);
+        res.status(200).send(`Livro ${id} deletado`);
     } catch {
         console.log(error);
     }
@@ -149,7 +182,7 @@ app.post("/api/auth/addBookToUser/:bookId/:userId", async (req, res) => {
     const { bookId, userId } = req.params;
     try {
         await addBookToUser(bookId, userId);
-        res.status(200).send();
+        res.status(200).send(`Livro ${bookId} adicionado ao usuário ${userId}`);
     } catch {
         console.log(error);
     }

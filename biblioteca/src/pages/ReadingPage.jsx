@@ -63,7 +63,7 @@ function Reading(){
   return (
     <div style={{ height: '100vh' }}>
       <ReactReader
-        url="http://localhost:3000/api/books/read/31.epub"
+        url="http://localhost:3000/api/books/read/29.epub"
         location={location}
         locationChanged={(epubcfi) => setLocation(epubcfi)}
         // getRendition={(rendition) => {

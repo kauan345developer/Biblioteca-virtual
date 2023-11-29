@@ -11,6 +11,10 @@ async function getBookById(id) {
   return await response.json();
 }
 
+async function getBookByName(name,limit){
+  const response = await fetch(`${API_BASE_URL}/api/books/searchByName/${name}?limit=${limit}`);
+  return await response.json()
+}
 // Adicione outras funções para as chamadas à API
 
-export { getAllBooks, getBookById };
+export { getAllBooks, getBookById,getBookByName };

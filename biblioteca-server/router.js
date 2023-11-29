@@ -1,11 +1,7 @@
 import express, { json } from "express";
 import cors from "cors";
-import {
-    getAllBooks,
-    getBookById,
-    getBookByName,
-    incrementView,
-} from "./DB/functions.js";
+import { getAllBooks, getBookById, getBookByName, incrementView } from "./DB/functions.js";
+import { createUser, getUserByEmail } from "./DB/userFunctions.js";
 import { error } from "console";
 import { Sequelize } from "sequelize";
 
@@ -13,6 +9,49 @@ const app = express();
 
 app.use(cors());
 app.use(json());
+
+
+app.post("/api/users/cadastro", async (req, res) => {
+    const { nome, email, senha } = req.body;
+  
+    try {
+      // Validação e-mail
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).send({ success: false, message: "Formato de e-mail inválido" });
+      }
+  
+      // Verificar se o e-mail já está cadastrado
+      const existingUser = await getUserByEmail(email);
+      if (existingUser) {
+        return res.status(409).send({ success: false, message: "Este e-mail já está cadastrado" });
+      }
+  
+      await createUser({ nome, email, senha });
+  
+      res.status(200).send({ success: true, message: "Cadastro bem-sucedido" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ success: false, message: "Erro no cadastro" });
+    }
+  });
+
+  app.post("/api/users/login", async (req, res) => {
+    const { email, senha } = req.body;
+  
+    try {
+      const user = await getUserByEmail(email);
+  
+      if (user && user.senha === senha) {
+        res.status(200).send({ success: true, message: "Login bem-sucedido" });
+      } else {
+        res.status(401).send({ success: false, message: "Credenciais inválidas" });
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ success: false, message: "Erro no login" });
+    }
+  });
 
 app.get("/api/books/searchById/:id", async (req, res) => {
     const id = parseInt(req.params.id);

@@ -65,6 +65,10 @@ const usuarios = client.define(
         senha: {
             type: Sequelize.TEXT,
         },
+        admin: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false,
+        }
     },
     { timestamps: false }
 );

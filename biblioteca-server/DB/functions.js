@@ -44,6 +44,14 @@ async function getMostSoldBooks(limit) {
     });
 }
 
+async function activateBook(id) {
+    livros.update({ ativo: true }, { where: { id: id } });
+}
+
+async function deactivateBook(id) {
+    livros.update({ ativo: false }, { where: { id: id } });
+}
+
 // relacionados a usuario
 // Função para obter um usuário pelo e-mail
 export const getUserByEmail = async (email, senha) => {
@@ -103,6 +111,7 @@ export {
     getAllBooks,
     getBookById,
     getMostSoldBooks,
+    activateBook,
     incrementView,
     getBookByName,
     addBookToUser,

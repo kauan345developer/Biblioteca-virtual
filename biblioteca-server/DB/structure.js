@@ -18,6 +18,10 @@ const livros = client.define(
         vendas: {
             type: Sequelize.INTEGER,
         },
+        disponivel: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false,
+        },
     },
     { timestamps: false }
 );

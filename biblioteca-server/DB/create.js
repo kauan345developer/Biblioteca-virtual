@@ -8,6 +8,8 @@ import {
     livros_generos,
     usuarios_livros,
 } from "./structure.js";
+import { activateBook } from "./functions.js";
+import * as fs from 'fs';
 
 function randomNumber(x, y) {
     return Math.floor(Math.random() * y) + x;
@@ -742,6 +744,7 @@ const biblioteca = {
             editora: "Editora ABC",
             views: randomNumber(1, 1000),
             vendas: randomNumber(1, 100),
+            disponivel: true,
             autores: [
                 {
                     nome: "Beatriz",
@@ -768,6 +771,7 @@ const biblioteca = {
             editora: "Principis",
             views: randomNumber(1, 1000),
             vendas: randomNumber(1, 100),
+            disponivel: true,
             autores: [
                 {
                     nome: "Marcos",
@@ -794,6 +798,7 @@ const biblioteca = {
             editora: "Planeta Minotauro",
             views: randomNumber(1, 1000),
             vendas: randomNumber(1, 100),
+            disponivel: true,
             autores: [
                 {
                     nome: "Tricia",

@@ -1,6 +1,7 @@
 import client from "./client.js";
 import { Op } from "sequelize";
 import bcrypt from "bcrypt";
+
 import {
     livros,
     generos,

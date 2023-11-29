@@ -1,0 +1,11 @@
+@use "../../sass/colors.scss" as *;
+
+.nav{
+  width: 100%;
+  background-color: $first-color;
+  padding: 1rem;
+  span{
+    text-decoration: none;
+    color: white;
+  }
+}

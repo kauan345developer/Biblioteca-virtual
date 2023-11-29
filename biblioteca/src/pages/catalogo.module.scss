@@ -1,28 +1,42 @@
 @use "../sass/colors.scss" as *;
 
-.container{
-
-  h1{
+.container {
+  h1 {
     text-align: center;
   }
 
-  .gridContainer{
+  .gridContainer {
     min-height: 100%;
     display: grid;
     justify-content: center;
     padding: 1rem;
-    grid-template-columns: repeat(auto-fit,10rem);
+    grid-template-columns: repeat(auto-fit, 12rem);
     // gap: .2rem;
-    gap: .2rem;
-    >div{
-      padding-top: .6rem;
+    row-gap: .7rem;
+    column-gap: .9rem;
+    div {
+      padding-top: 0.6rem;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       border-radius: 10px;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
       cursor: pointer;
+      text-align: center;
+      height: 17.8em;
+      color: $first-color;
+      font-weight: bold;
+      text-decoration: none;
+      &:hover{
+        border: 1px solid $first-color;
+        
+      }
+
+
+      img {
+        width: 11rem;
+        height: 14rem;
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import styles from "./login.module.scss";
 import logo from "../assets/LogoBiblioteca.png";
 
@@ -18,7 +18,7 @@ function Login() {
   };
 
   const [loginError, setLoginError] = useState(null);
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ function Login() {
 
       if (response.ok) {
         console.log('Login bem-sucedido!');
-        history.push('/bookpage');
+        history('/bookpage');
       } else {
         const data = await response.json();
         setLoginError(data.message);
@@ -47,10 +47,12 @@ function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.login}>
+        <Link to = "/">
         <div>
           <img src={logo} alt="" />
         </div>
-        <form onSubmit={handleLogin}>
+        </Link>
+        <form onSubmit={handleLogin} className={styles.form}>
           <div>
             <label htmlFor="email">Email</label>
             <input
@@ -76,7 +78,7 @@ function Login() {
         </form>
         <div>
         <span>
-            Cadastre-se, <a href="/cadastro">Clique Aqui</a>
+            Cadastre-se, <a style={{ textDecoration: 'none', fontWeight: 'bold' }} href="/cadastro">Clique Aqui</a>
           </span>
         </div>
       </div>

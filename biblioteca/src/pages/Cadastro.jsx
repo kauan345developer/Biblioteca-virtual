@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import styles from "./cadastro.module.scss";
 import logo from "../assets/LogoBiblioteca.png";
 
@@ -12,7 +12,7 @@ function Cadastro() {
     repeatSenha: "",
   });
 
-  const history = useHistory();
+  const history = useNavigate();
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
@@ -72,7 +72,7 @@ function Cadastro() {
 
       if (response.ok) {
         console.log("Cadastro bem-sucedido!");
-        history.push("/login");
+        history("/login");
       } else {
         console.error("Falha no cadastro. Tente novamente.");
       }
@@ -138,13 +138,13 @@ function Cadastro() {
               onChange={handleInputChange}
             />
           </div>
-          <button onClick={handleCadastro}>Cadastrar</button>
-        </div>
         {errors.nome && <div className={styles.error}>{errors.nome}</div>}
         {errors.email && <div className={styles.error}>{errors.email}</div>}
         {errors.repeatEmail && <div className={styles.error}>{errors.repeatEmail}</div>}
         {errors.senha && <div className={styles.error}>{errors.senha}</div>}
         {errors.repeatSenha && <div className={styles.error}>{errors.repeatSenha}</div>}
+          <button onClick={handleCadastro}>Cadastrar</button>
+        </div>
       </div>
     </div>
   );

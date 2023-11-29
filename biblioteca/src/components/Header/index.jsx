@@ -12,7 +12,9 @@ function Header(){
         <input type="text" />
         <button> <img src={searchIcon} alt="" /></button>
       </div>
+      <Link to = "login">
       <button className={styles.loginButton}>Login</button>
+      </Link>
     </div>
   )
 

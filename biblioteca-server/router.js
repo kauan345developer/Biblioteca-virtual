@@ -152,6 +152,7 @@ app.post("/api/users/login", async (req, res) => {
             res.status(200).send({
                 success: true,
                 message: "Login bem-sucedido",
+                id: user.id
             });
         } else {
             res.status(401).send({

@@ -23,22 +23,25 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      console.log(loginData)
-      const response = await fetch('http://localhost:3000/api/users/login', {
+        await fetch('http://localhost:3000/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(loginData),
-      });
+      }).then(async (response) => {
+        return await response.json();
+      }).then(async (data) => {
+        if (data.success) {
+          console.log(data.message);
+          loginData.id = data.id;
+          localStorage.setItem(`account`, JSON.stringify(loginData));
+          // redirecionar para página de usuário
+          setLoginError(data.message);
+        }
+      })
 
-      if (response.ok) {
-        console.log('Login bem-sucedido!');
-        history('/bookpage');
-      } else {
-        const data = await response.json();
-        setLoginError(data.message);
-      }
+      
     } catch (error) {
       console.error('Erro ao fazer login:', error.message);
       setLoginError('Erro ao fazer login. Tente novamente.');

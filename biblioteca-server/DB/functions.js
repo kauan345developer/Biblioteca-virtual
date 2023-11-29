@@ -1,5 +1,6 @@
 import client from "./client.js";
 import { Op } from "sequelize";
+import bcrypt from "bcrypt";
 import {
     livros,
     generos,
@@ -12,18 +13,18 @@ import {
 
 async function getAllBooks() {
     return await livros.findAll();
-};
+}
 
 async function getBookById(id) {
     return await livros.findOne({ where: { id: id } });
-};
+}
 
 async function incrementView(id) {
     livros.update(
         { views: client.literal("views + 1") },
         { where: { id: id } }
     );
-};
+}
 
 async function getBookByName(name, limit) {
     return await livros.findAll({
@@ -34,9 +35,50 @@ async function getBookByName(name, limit) {
         },
         limit: limit,
     });
-};
+}
+
+async function getMostSoldBooks(limit) {
+    return await livros.findAll({
+        limit: limit,
+        order: [["vendas", "DESC"]],
+    });
+}
 
 // relacionados a usuario
+// Função para obter um usuário pelo e-mail
+export const getUserByEmail = async (email, senha) => {
+    try {
+        const user = usuarios.find((usuario) => usuario.email === email);
+
+        if (user && (await bcrypt.compare(senha, user.senha))) {
+            return user;
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error("Erro ao buscar usuário por e-mail:", error);
+        throw error;
+    }
+};
+
+// Função para criar um novo usuário
+export const createUser = async ({ nome, email, senha }) => {
+    try {
+        const existingUser = await getUserByEmail(email);
+        if (existingUser) {
+            throw new Error("Este e-mail já está cadastrado");
+        }
+
+        const novoUsuario = { nome, email, senha };
+        usuarios.push(novoUsuario);
+
+        return novoUsuario;
+    } catch (error) {
+        console.error("Erro ao criar usuário:", error);
+        throw error;
+    }
+};
+
 async function addBookToUser(bookId, userId) {
     return await usuarios
         .findOne({ where: { id: userId } })
@@ -45,7 +87,7 @@ async function addBookToUser(bookId, userId) {
                 await livros.findOne({ where: { id: bookId } })
             );
         });
-};
+}
 
 async function getAllBooksFromUser(userId) {
     return await usuarios
@@ -53,15 +95,14 @@ async function getAllBooksFromUser(userId) {
         .then(async (createdUsuario) => {
             return await createdUsuario.getLivros();
         });
-};
+}
 
-async function checkUserHasBook(userId, bookId) {
-
-};
+async function checkUserHasBook(userId, bookId) {}
 
 export {
     getAllBooks,
     getBookById,
+    getMostSoldBooks,
     incrementView,
     getBookByName,
     addBookToUser,

@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom"
-import router from "./router.jsx"
-import { StockContextBookProvider } from "./contexts/StockBookContext.jsx"
+import React from 'react';
+import { StockContextBookProvider } from './contexts/StockBookContext.jsx';
 
 function App() {
 

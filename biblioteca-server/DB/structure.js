@@ -15,6 +15,9 @@ const livros = client.define(
         views: {
             type: Sequelize.INTEGER,
         },
+        vendas: {
+            type: Sequelize.INTEGER,
+        },
     },
     { timestamps: false }
 );
@@ -40,7 +43,7 @@ const autores = client.define(
         },
         sobrenome: {
             type: Sequelize.TEXT,
-        }
+        },
     },
     { timestamps: false }
 );

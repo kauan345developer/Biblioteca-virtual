@@ -6,7 +6,7 @@ import logo from "../assets/LogoBiblioteca.png";
 function Login() {
   const [loginData, setLoginData] = useState({
     email: '',
-    senha: '',
+    password: '',
   });
 
   const handleInputChange = (e) => {
@@ -23,6 +23,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      console.log(loginData)
       const response = await fetch('http://localhost:3000/api/users/login', {
         method: 'POST',
         headers: {

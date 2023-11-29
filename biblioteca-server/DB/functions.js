@@ -1,5 +1,5 @@
 import client from "./client.js";
-import { Op } from "sequelize";
+import { Op, where } from "sequelize";
 import bcrypt from "bcrypt";
 
 import {
@@ -60,18 +60,17 @@ async function deleteBook(id) {
 
 // relacionados a usuario
 // Função para obter um usuário pelo e-mail
-export const getUserByEmail = async (email, senha) => {
+export const getUserByEmail = async (email) => {
     try {
-        const user = usuarios.find((usuario) => usuario.email === email);
-
-        if (user && (await bcrypt.compare(senha, user.senha))) {
+        const user = usuarios.findOne({ where: { email: email } });
+        if (user) {
             return user;
         } else {
             return null;
         }
     } catch (error) {
         console.error("Erro ao buscar usuário por e-mail:", error);
-        throw error;
+        // throw error;
     }
 };
 
@@ -84,7 +83,7 @@ export const createUser = async ({ nome, email, senha }) => {
         }
 
         const novoUsuario = { nome, email, senha };
-        usuarios.push(novoUsuario);
+        usuarios.create(novoUsuario);
 
         return novoUsuario;
     } catch (error) {

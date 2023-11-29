@@ -60,7 +60,7 @@ app.get("/api/books/mostSold", async (req, res) => {
     if (isNaN(limit)) limit = 1;
     try {
         await getMostSoldBooks(limit).then((query) => {
-            console.log("a")
+            console.log("a");
             res.status(200).send(query);
         });
     } catch {
@@ -144,12 +144,11 @@ app.post("/api/users/cadastro", async (req, res) => {
 });
 
 app.post("/api/users/login", async (req, res) => {
-    const { email, senha } = req.body;
+    const { email, password } = req.body;
 
     try {
         const user = await getUserByEmail(email);
-
-        if (user && user.senha === senha) {
+        if (user && user.senha === password) {
             res.status(200).send({
                 success: true,
                 message: "Login bem-sucedido",

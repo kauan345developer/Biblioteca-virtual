@@ -15,6 +15,13 @@ const livros = client.define(
         views: {
             type: Sequelize.INTEGER,
         },
+        vendas: {
+            type: Sequelize.INTEGER,
+        },
+        disponivel: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false,
+        },
     },
     { timestamps: false }
 );
@@ -40,7 +47,7 @@ const autores = client.define(
         },
         sobrenome: {
             type: Sequelize.TEXT,
-        }
+        },
     },
     { timestamps: false }
 );
@@ -58,6 +65,10 @@ const usuarios = client.define(
         senha: {
             type: Sequelize.TEXT,
         },
+        admin: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false,
+        }
     },
     { timestamps: false }
 );

@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
 
   .login{
     display: flex;
@@ -17,6 +18,11 @@
     height: auto;
     border-radius: 10px;
     border: 1px solid $first-color;
+
+    @media screen and (max-width: 460px) {
+      width: 90%;
+      margin: 0 auto;
+    }
 
     div:nth-child(1){
       object-fit: cover;
@@ -33,6 +39,12 @@
       display: grid;
       grid-template-columns: repeat(2,auto);
       gap: .4rem;
+
+      @media screen and (max-width: 460px) {
+        display: flex;
+        flex-flow: column wrap;
+        
+      }
 
       div{
         display: flex;

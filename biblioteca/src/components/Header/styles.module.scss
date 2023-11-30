@@ -77,3 +77,28 @@
     }
   }
 }
+
+@media (max-width:600px){
+  .container{
+    .search{
+      input{
+        
+        width: 7rem;
+      }
+    }
+
+    .loginButton{
+      border: none;
+      padding: .5rem;
+      border-radius: .3rem;
+      background-color: c.$first-color;
+      color: c.$third-color;
+      cursor: pointer;
+    }
+
+    .logo{
+      width: 5.55rem;
+      height: 5.55rem;
+    }
+  }
+}

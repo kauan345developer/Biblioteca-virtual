@@ -45,7 +45,7 @@ function Book(props) {
 
   useEffect(() => {
     fetchBook();
-  }, []); // Execute apenas uma vez quando o componente é montado
+  }, []); 
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("account"));

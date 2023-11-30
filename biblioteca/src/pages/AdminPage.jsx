@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 // import React from 'react';
 import { useNavigate, Link, Outlet } from "react-router-dom";
 import user from "../assets/users/user1.png"; // Substitua pelo caminho correto da imagem
@@ -7,9 +8,13 @@ import { userToken } from "../apis/api.js";
 function Admin() {
   const token = JSON.parse(localStorage.getItem("account"));
 
+  const clearLocalStorage = () => {
+    localStorage.clear();
+  };
+
   let usuarioID = {};
+  const history = useNavigate();
   async function fetchData() {
-    const history = useNavigate();
     usuarioID = await userToken(token);
     if (!usuarioID.isAdmin) {
       history("/");
@@ -18,7 +23,7 @@ function Admin() {
     } catch (error) {
       console.error("Erro ao buscar os livros:", error);
     }
-  };
+  }
 
   fetchData();
 
@@ -37,11 +42,11 @@ function Admin() {
             <Link to="del">
               <span>Delete BooK</span>
             </Link>
-            <Link to="view">
-              <span>View BooK</span>
-            </Link>
             <Link to="bookshelf">
               <span>Book Shelf</span>
+            </Link>
+            <Link to="/login">
+              <button className={styles.btnSair} onClick={clearLocalStorage}>Sair</button>
             </Link>
           </nav>
         </div>

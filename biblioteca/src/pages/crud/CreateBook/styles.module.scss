@@ -21,13 +21,16 @@
     outline: none;
   }
   
+  .divTextArea{
+    grid-column: span 3;
+  }
 
   textarea{
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
     padding: .1rem;
-    grid-column: span 3;
+    width: 100%;
   }
 
   button {

@@ -137,12 +137,11 @@ function CreateBook() {
         />
       </div>
 
-      <div>
+      <div className={styles.divTextArea}>
         <label htmlFor="Descricao">Descrição</label>
         <textarea
           name=""
           id=""
-          cols="41"
           rows="4"
           value={description}
           onChange={(e) => setDescription(e.target.value)}

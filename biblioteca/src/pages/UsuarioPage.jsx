@@ -30,7 +30,7 @@ function UsuarioPage() {
     };
 
     fetchData();
-  }, []);
+  }, [history]);
 
   console.log(bookItems);
 

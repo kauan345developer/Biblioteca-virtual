@@ -58,7 +58,7 @@ function Book(props){
     console.log(token)
 
     if(hasBook.loggedIn){
-      console.log("ja possui")
+      return navigate("reading")
     }
 
 

@@ -1,0 +1,50 @@
+/* styles.module.scss */
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3,20rem);
+  // grid-template-rows: repeat(3,1fr);
+  grid-gap: 10px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 1rem;
+  label {
+    display: block;
+  }
+  
+  input[type="text"],
+  input[type="file"] {
+    width: 20rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+
+  textarea{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    padding: .1rem;
+    grid-column: span 3;
+  }
+
+  button {
+    grid-column: span 3; /* Ocupa duas colunas */
+    margin-top: 10px;
+    padding: 10px;
+    height: 3rem;
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+    &:hover {
+      background-color: #0055aa;
+    }
+  }
+}
+

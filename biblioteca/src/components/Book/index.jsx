@@ -45,6 +45,9 @@ function Book(props) {
 
   useEffect(() => {
     fetchBook();
+    if (!props.disponivel) {
+      btnLer.innerHTML = "Indisponível";
+    }
   }, []); 
 
   useEffect(() => {
@@ -65,6 +68,12 @@ function Book(props) {
   const handleClick = async () => {
     await fetchBook();
     const token = JSON.parse(localStorage.getItem("account"));
+
+    console.log(props)
+
+    if (!props.disponivel) {
+      return;
+    }
 
     if (!loged) {
       console.log("não logado");

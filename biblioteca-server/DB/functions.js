@@ -153,6 +153,16 @@ async function checkIfUserIsLoggedIn(token) {
         });
 }
 
+async function createBook({ titulo, editora, sinopse }) {
+    try {
+        const novoLivro = await livros.create({ titulo, editora, sinopse });
+        return novoLivro;
+    } catch (error) {
+        console.error('Erro ao cadastrar livro:', error);
+        throw error;
+    }
+}
+
 export {
     getAllBooks,
     getBookById,
@@ -167,4 +177,5 @@ export {
     addBookToUser,
     checkIfUserHasBook,
     getAllBooksFromUser,
+    createBook,
 };

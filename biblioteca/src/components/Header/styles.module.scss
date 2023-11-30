@@ -13,6 +13,7 @@
 
   .search{
     display: flex;
+    position: relative;
 
     input{
       height:2rem ;
@@ -48,4 +49,31 @@
     cursor: pointer;
   }
   
+
+  .searchBooks{
+    display: flex;
+    width: 21.5rem;
+    gap:1rem;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 3rem;
+    left: -2rem;
+    z-index: 1;
+    background-color: white;
+    padding-top: 1rem;
+    border-radius: 5px;
+    div{
+      // border: 1px solid royalblue;
+      text-align: center;
+      width: 10.1rem;
+      font-weight: bold;
+      p{
+        color: black;
+      }
+      img{
+        width: 8rem;
+        height: 10rem;
+      }
+    }
+  }
 }

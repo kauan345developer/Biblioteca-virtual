@@ -19,9 +19,9 @@ import {
 } from "./DB/functions.js";
 import { error } from "console";
 import { Sequelize } from "sequelize";
-
+const bodyParser = require('body-parser');
 const app = express();
-
+const port = 3000;
 app.use(cors());
 app.use(json());
 
@@ -167,6 +167,25 @@ app.post("/api/users/login", async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send({ success: false, message: "Erro no login" });
+    }
+});
+
+//cadastro livro -------------------------------------------
+
+app.post('/api/books/cadastro', async (req, res) => {
+    const { titulo, editora, sinopse } = req.body;
+
+    try {
+        if (!titulo || !editora || !sinopse) {
+            return res.status(400).json({ success: false, message: 'Preencha todos os campos.' });
+        }
+
+        const novoLivro = await createBook({ titulo, editora, sinopse });
+
+        res.status(201).json({ success: true, message: 'Livro cadastrado com sucesso!', livro: novoLivro });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: 'Erro no cadastro do livro.' });
     }
 });
 

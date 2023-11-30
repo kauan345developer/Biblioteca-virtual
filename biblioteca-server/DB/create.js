@@ -1,18 +1,18 @@
 import { Sequelize, client } from "./client.js";
 import {
-  livros,
-  generos,
-  autores,
-  usuarios,
-  livros_autores,
-  livros_generos,
-  usuarios_livros,
+    livros,
+    generos,
+    autores,
+    usuarios,
+    livros_autores,
+    livros_generos,
+    usuarios_livros,
 } from "./structure.js";
 import { activateBook } from "./functions.js";
 import * as fs from "fs";
 
 function randomNumber(x, y) {
-  return Math.floor(Math.random() * y) + x;
+    return Math.floor(Math.random() * y) + x;
 }
 
 const biblioteca = {
@@ -724,16 +724,16 @@ const biblioteca = {
 };
 
 try {
-  await client.sync({ force: true });
-  for (const livro of biblioteca.livros) {
-    const createdLivro = await livros.create(livro);
+    await client.sync({ force: true });
+    for (const livro of biblioteca.livros) {
+        const createdLivro = await livros.create(livro);
 
-    for (const autor of livro.autores) {
-      const [createdAutor, boolean] = await autores.findOrCreate({
-        where: { nome: autor.nome, sobrenome: autor.sobrenome },
-      });
-      await createdLivro.addAutores(createdAutor);
-    }
+        for (const autor of livro.autores) {
+            const [createdAutor, boolean] = await autores.findOrCreate({
+                where: { nome: autor.nome, sobrenome: autor.sobrenome },
+            });
+            await createdLivro.addAutores(createdAutor);
+        }
 
         for (const genero of livro.generos) {
             const [createdGenero, boolean] = await generos.findOrCreate({
@@ -743,14 +743,14 @@ try {
         }
     }
 
-  for (const usuario of biblioteca.usuarios) {
-    const createdUsuario = await usuarios.create(usuario);
+    //   for (const usuario of biblioteca.usuarios) {
+    //     const createdUsuario = await usuarios.create(usuario);
 
-    await createdUsuario.addLivros(
-      await livros.findOne({ where: { id: randomNumber(1, 31) } })
-    );
-  }
-  await client.close();
+    //     await createdUsuario.addLivros(
+    //       await livros.findOne({ where: { id: randomNumber(1, 31) } })
+    //     );
+    //   }
+    await client.close();
 } catch (error) {
-  console.log(error);
+    console.log(error);
 }

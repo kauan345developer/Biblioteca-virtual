@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 import styles from "./styles.module.scss";
 import img1 from "../../../assets/bookCover/livro1.png";
 import { BookList } from "../../../components/BooksList";
+import { Navigate } from "react-router-dom";
 
 function CreateBook() {
   const [title, setTitle] = useState("");
@@ -64,7 +65,10 @@ function CreateBook() {
             body: bookUpload,
           }
         );
-        console.log(await upload.json());
+        if (upload.ok) {
+          alert("Livro cadastrado com sucesso");
+          Navigate("/admin");
+        }
       });
     } catch (error) {
       console.log(error);

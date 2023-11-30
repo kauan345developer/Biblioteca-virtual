@@ -12,7 +12,7 @@ function DeleteBook() {
         },
       });
       const data = await response.json();
-      console.log(data); // data.message = mensagem do livro excluído
+      alert(data.message);
     } catch (error) {
       console.error('Erro ao deletar o livro:', error);
     }

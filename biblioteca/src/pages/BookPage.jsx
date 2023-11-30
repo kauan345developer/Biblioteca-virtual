@@ -2,12 +2,14 @@
 
 import {Book} from "../components/Book"
 // import imgBook from "../assets/bookCover/livro1.png"
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getBookById } from "../apis/api";
 import { useEffect,useState } from "react";
 // import image from "../../../biblioteca-server/public/livros/capas/1.png"
 
 function BookPage() {
+  const history = useNavigate();
+  
   const url = useLocation().pathname
   const id = url.match(/\/(\d+)$/)[1]
   console.log(id)
@@ -24,6 +26,7 @@ function BookPage() {
         }
       } catch (error) {
         console.error('Erro ao buscar os livros:', error);
+        history("/");
       }
     };
     

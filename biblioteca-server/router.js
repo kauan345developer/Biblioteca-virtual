@@ -23,6 +23,7 @@ import { Sequelize } from "sequelize";
 import fs from "fs";
 import fileUpload from "express-fileupload";
 import { create } from "domain";
+import {livros} from "./DB/structure.js";
 
 const app = express();
 const port = 3000;
@@ -222,6 +223,8 @@ app.post("/api/books/upload/:bookId", async (req, res) => {
 
         ePub.mv(`./public/livros/epubs/${bookId}.epub`);
         capa.mv(`./public/livros/capas/${bookId}.png`);
+
+        await livros.update({ disponivel: true }, { where: { id: bookId }});
 
         res.status(200).json({
             success: true,

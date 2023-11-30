@@ -149,6 +149,7 @@ async function checkIfUserIsLoggedIn(token) {
             if (token) {
                 return {
                     token: token,
+                    name: user.nome,
                     isAdmin: user.admin,
                 };
             } else {

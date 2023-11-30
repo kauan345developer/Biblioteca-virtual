@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { useContext,useState,useEffect } from "react";
 import { StockContext } from "../../contexts/StockBookContext";
 import img1 from "../../assets/bookCover/livro1.png"
+import { getMostSold } from "../../apis/api.js";
 function BookList(props) {
   const settings = {
     dots: false,
@@ -21,8 +22,23 @@ function BookList(props) {
 
 
   // const Livro1 = useContext(StockContext)
-  const {bookItems} = useContext(StockContext)
+  
 
+  const [bookItems, setBookItems] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getMostSold();
+        console.log( await getMostSold())
+        setBookItems(response);
+      } catch (error) {
+        console.error('Erro ao buscar os livros:', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
 
 
   return (

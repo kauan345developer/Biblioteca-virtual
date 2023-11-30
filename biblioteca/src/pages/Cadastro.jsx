@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./cadastro.module.scss";
 import logo from "../assets/LogoBiblioteca.png";
 
@@ -84,9 +84,11 @@ function Cadastro() {
   return (
     <div className={styles.container}>
       <div className={styles.login}>
-        <div>
-          <img src={logo} alt="" />
-        </div>
+        <Link to="/">
+          <div>
+            <img src={logo} alt="" />
+          </div>
+        </Link>
         <div>
           <div>
             <label htmlFor="nome">Nome Completo</label>
@@ -138,11 +140,15 @@ function Cadastro() {
               onChange={handleInputChange}
             />
           </div>
-        {errors.nome && <div className={styles.error}>{errors.nome}</div>}
-        {errors.email && <div className={styles.error}>{errors.email}</div>}
-        {errors.repeatEmail && <div className={styles.error}>{errors.repeatEmail}</div>}
-        {errors.senha && <div className={styles.error}>{errors.senha}</div>}
-        {errors.repeatSenha && <div className={styles.error}>{errors.repeatSenha}</div>}
+          {errors.nome && <div className={styles.error}>{errors.nome}</div>}
+          {errors.email && <div className={styles.error}>{errors.email}</div>}
+          {errors.repeatEmail && (
+            <div className={styles.error}>{errors.repeatEmail}</div>
+          )}
+          {errors.senha && <div className={styles.error}>{errors.senha}</div>}
+          {errors.repeatSenha && (
+            <div className={styles.error}>{errors.repeatSenha}</div>
+          )}
           <button onClick={handleCadastro}>Cadastrar</button>
         </div>
       </div>

@@ -13,4 +13,15 @@ async function getBookById(id) {
 
 // Adicione outras funções para as chamadas à API
 
-export { getAllBooks, getBookById };
+async function getMostSold(){
+  const response = await fetch(`${API_BASE_URL}/api/books/mostSold?limit=12`);
+  return await response.json();
+}
+
+
+async function searchByName(name){
+  const response = await fetch(`${API_BASE_URL}/api/books/searchByName/${name}?limit=4`);
+  return await response.json();
+}
+
+export { getAllBooks, getBookById,getMostSold,searchByName };

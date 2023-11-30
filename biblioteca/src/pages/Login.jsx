@@ -33,9 +33,7 @@ function Login() {
         return await response.json();
       }).then(async (data) => {
         if (data.success) {
-          console.log(data.message);
-          loginData.id = data.id;
-          localStorage.setItem(`account`, JSON.stringify(loginData));
+          localStorage.setItem(`account`, JSON.stringify(data.token));
           // redirecionar para página de usuário
           setLoginError(data.message);
         }

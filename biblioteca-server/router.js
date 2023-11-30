@@ -11,6 +11,8 @@ import {
     deleteBook,
     addBookToUser,
     getAllBooksFromUser,
+    generateTokenForUser,
+    checkIfUserHasBook,
     createUser,
     getUserByEmail,
 } from "./DB/functions.js";
@@ -149,11 +151,10 @@ app.post("/api/users/login", async (req, res) => {
     try {
         const user = await getUserByEmail(email);
         if (user && user.senha === password) {
-            
             res.status(200).send({
                 success: true,
                 message: "Login bem-sucedido",
-                token: token
+                token: token,
             });
         } else {
             res.status(401).send({
@@ -173,6 +174,22 @@ app.get("/api/auth/getAllBooksFromUser/:userId", async (req, res) => {
     try {
         await getAllBooksFromUser(userId).then((query) => {
             res.status(200).send(query);
+        });
+    } catch {
+        console.log(error);
+    }
+});
+
+app.get("/api/auth/checkIfUserHasBook/:userId/:bookId", async (req, res) => {
+    const { userId, bookId } = req.params;
+    try {
+        await checkIfUserHasBook(userId, bookId).then((query) => {
+            console.log(query);
+            if (query) {
+                res.status(200).send("true");
+            } else {
+                res.status(200).send("false");
+            }
         });
     } catch {
         console.log(error);

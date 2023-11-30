@@ -111,9 +111,23 @@ async function getAllBooksFromUser(userId) {
 }
 
 async function checkIfUserHasBook(userId, bookId) {
-    await usuarios.findOne({ where: { userId: userId } }).then((user) => {
-        
-    });
+    let hasBook = false;
+    await usuarios
+        .findOne({ where: { id: userId } })
+        .then(async (createdUsuario) => {
+            await createdUsuario.getLivros().then((livros) => {
+                livros.forEach((livro) => {
+                    if (livro.id == bookId) {
+                        hasBook = true;
+                    }
+                });
+            });
+        });
+    return hasBook;
+}
+
+async function generateTokenForUser(userId) {
+    return await usuarios.findOne({ where: { id: userId } }).then((user) => {});
 }
 
 export {
@@ -124,7 +138,9 @@ export {
     deactivateBook,
     deleteBook,
     incrementView,
+    generateTokenForUser,
     getBookByName,
     addBookToUser,
+    checkIfUserHasBook,
     getAllBooksFromUser,
 };

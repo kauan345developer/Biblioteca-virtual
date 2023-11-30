@@ -6,7 +6,7 @@ import logo from "../assets/LogoBiblioteca.png";
 function Login() {
   const [loginData, setLoginData] = useState({
     email: '',
-    senha: '',
+    password: '',
   });
 
   const handleInputChange = (e) => {
@@ -23,21 +23,23 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/users/login', {
+        await fetch('http://localhost:3000/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(loginData),
-      });
+      }).then(async (response) => {
+        return await response.json();
+      }).then(async (data) => {
+        if (data.success) {
+          localStorage.setItem(`account`, JSON.stringify(data.token));
+          // redirecionar para página de usuário
+          setLoginError(data.message);
+        }
+      })
 
-      if (response.ok) {
-        console.log('Login bem-sucedido!');
-        history('/bookpage');
-      } else {
-        const data = await response.json();
-        setLoginError(data.message);
-      }
+      
     } catch (error) {
       console.error('Erro ao fazer login:', error.message);
       setLoginError('Erro ao fazer login. Tente novamente.');

@@ -1,5 +1,5 @@
 import client from "./client.js";
-import { Op } from "sequelize";
+import { Op, where } from "sequelize";
 import bcrypt from "bcrypt";
 
 import {
@@ -10,7 +10,12 @@ import {
     livros_generos,
     livros_autores,
     usuarios_livros,
+    usuario_tokens,
 } from "./structure.js";
+
+async function generateRandomString(length) {
+    return [...Array(length)].map(() => Math.random().toString(36)[2]).join("");
+}
 
 async function getAllBooks() {
     return await livros.findAll();
@@ -60,18 +65,17 @@ async function deleteBook(id) {
 
 // relacionados a usuario
 // Função para obter um usuário pelo e-mail
-export const getUserByEmail = async (email, senha) => {
+export const getUserByEmail = async (email) => {
     try {
-        const user = usuarios.find((usuario) => usuario.email === email);
-
-        if (user && (await bcrypt.compare(senha, user.senha))) {
+        const user = usuarios.findOne({ where: { email: email } });
+        if (user) {
             return user;
         } else {
             return null;
         }
     } catch (error) {
         console.error("Erro ao buscar usuário por e-mail:", error);
-        throw error;
+        // throw error;
     }
 };
 
@@ -84,7 +88,7 @@ export const createUser = async ({ nome, email, senha }) => {
         }
 
         const novoUsuario = { nome, email, senha };
-        usuarios.push(novoUsuario);
+        usuarios.create(novoUsuario);
 
         return novoUsuario;
     } catch (error) {
@@ -111,7 +115,53 @@ async function getAllBooksFromUser(userId) {
         });
 }
 
-async function checkUserHasBook(userId, bookId) {}
+async function checkIfUserHasBook(userId, bookId) {
+    let hasBook = false;
+    await usuarios
+        .findOne({ where: { id: userId } })
+        .then(async (createdUsuario) => {
+            await createdUsuario.getLivros().then((livros) => {
+                livros.forEach((livro) => {
+                    if (livro.id == bookId) {
+                        hasBook = true;
+                    }
+                });
+            });
+        });
+    return hasBook;
+}
+
+async function generateTokenForUser(userId) {
+    return await usuarios
+        .findOne({ where: { id: userId } })
+        .then(async (user) => {
+            const token = await generateRandomString(20);
+            await usuario_tokens.create({ token: token, usuarioId: userId });
+            return token;
+        });
+}
+
+async function checkIfUserIsLoggedIn(token) {
+    return await usuario_tokens
+        .findOne({ where: { token: token } })
+        .then(async (token) => {
+            if (token) {
+                return token;
+            } else {
+                return false;
+            }
+        });
+}
+
+async function createBook({ titulo, editora, sinopse }) {
+    try {
+        const novoLivro = await livros.create({ titulo, editora, sinopse });
+        return novoLivro;
+    } catch (error) {
+        console.error('Erro ao cadastrar livro:', error);
+        throw error;
+    }
+}
 
 export {
     getAllBooks,
@@ -121,7 +171,11 @@ export {
     deactivateBook,
     deleteBook,
     incrementView,
+    generateTokenForUser,
+    checkIfUserIsLoggedIn,
     getBookByName,
     addBookToUser,
+    checkIfUserHasBook,
     getAllBooksFromUser,
+    createBook,
 };

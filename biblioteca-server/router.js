@@ -11,14 +11,17 @@ import {
     deleteBook,
     addBookToUser,
     getAllBooksFromUser,
+    generateTokenForUser,
+    checkIfUserHasBook,
+    checkIfUserIsLoggedIn,
     createUser,
     getUserByEmail,
 } from "./DB/functions.js";
 import { error } from "console";
 import { Sequelize } from "sequelize";
-
+const bodyParser = require('body-parser');
 const app = express();
-
+const port = 3000;
 app.use(cors());
 app.use(json());
 
@@ -60,7 +63,7 @@ app.get("/api/books/mostSold", async (req, res) => {
     if (isNaN(limit)) limit = 1;
     try {
         await getMostSoldBooks(limit).then((query) => {
-            console.log("a")
+            console.log("a");
             res.status(200).send(query);
         });
     } catch {
@@ -144,15 +147,16 @@ app.post("/api/users/cadastro", async (req, res) => {
 });
 
 app.post("/api/users/login", async (req, res) => {
-    const { email, senha } = req.body;
+    const { email, password } = req.body;
 
     try {
         const user = await getUserByEmail(email);
-
-        if (user && user.senha === senha) {
+        if (user && user.senha === password) {
+            const token = await generateTokenForUser(user.id);
             res.status(200).send({
                 success: true,
                 message: "Login bem-sucedido",
+                token: token,
             });
         } else {
             res.status(401).send({
@@ -163,6 +167,25 @@ app.post("/api/users/login", async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send({ success: false, message: "Erro no login" });
+    }
+});
+
+//cadastro livro -------------------------------------------
+
+app.post('/api/books/cadastro', async (req, res) => {
+    const { titulo, editora, sinopse } = req.body;
+
+    try {
+        if (!titulo || !editora || !sinopse) {
+            return res.status(400).json({ success: false, message: 'Preencha todos os campos.' });
+        }
+
+        const novoLivro = await createBook({ titulo, editora, sinopse });
+
+        res.status(201).json({ success: true, message: 'Livro cadastrado com sucesso!', livro: novoLivro });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: 'Erro no cadastro do livro.' });
     }
 });
 
@@ -178,11 +201,42 @@ app.get("/api/auth/getAllBooksFromUser/:userId", async (req, res) => {
     }
 });
 
+app.get("/api/auth/checkIfUserHasBook/:userId/:bookId", async (req, res) => {
+    const { userId, bookId } = req.params;
+    try {
+        await checkIfUserHasBook(userId, bookId).then((query) => {
+            if (query) {
+                res.status(200).send({
+                    loggedIn: true,
+                    id: query.usuarioId,
+                });
+            } else {
+                res.status(200).send({
+                    loggedIn: false,
+                });
+            }
+        });
+    } catch {
+        console.log(error);
+    }
+});
+
 app.post("/api/auth/addBookToUser/:bookId/:userId", async (req, res) => {
     const { bookId, userId } = req.params;
     try {
         await addBookToUser(bookId, userId);
         res.status(200).send(`Livro ${bookId} adicionado ao usuário ${userId}`);
+    } catch {
+        console.log(error);
+    }
+});
+
+app.get("/api/auth/checkIfUserIsLoggedIn/:token", async (req, res) => {
+    const { token } = req.params;
+    try {
+        await checkIfUserIsLoggedIn(token).then((query) => {
+            res.status(200).send(query);
+        });
     } catch {
         console.log(error);
     }

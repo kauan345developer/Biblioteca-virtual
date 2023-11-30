@@ -6,6 +6,11 @@ import { Link } from "react-router-dom";
 function UsuarioPage() {
   const [bookItems, setBookItems] = useState([]);
 
+  const clearLocalStorage = () => {
+    localStorage.clear();
+    history("/");
+  }
+
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("account"));
     console.log(token);
@@ -71,7 +76,7 @@ function UsuarioPage() {
           })}
         </div>
         <Link to="/">
-          <button>Sair</button>
+          <button onClick={clearLocalStorage}>Sair</button>
         </Link>
       </div>
     </div>

@@ -1,86 +1,106 @@
 /* eslint-disable react/prop-types */
 // import heart from "../../assets/icons/heart.svg"
 // import { Stars } from "./stars"
-import { addBookToUser,userToken,userHasBook,isLogged } from "../../apis/api.js";
-import styles from "./styles.module.scss"
-import { useState,useEffect, } from "react";
+import {
+  addBookToUser,
+  userToken,
+  userHasBook,
+  isLogged,
+} from "../../apis/api.js";
+import styles from "./styles.module.scss";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useLocation } from "react-router-dom";
 
-function Book(props){
+// ... (seu código anterior)
 
-  const [hasBook, setHasBook] = useState([])
+function Book(props) {
+  const [hasBook, setHasBook] = useState([]);
+  const [loged, setLoged] = useState(false);
+  const navigate = useNavigate();
+
+  const fetchBook = async () => {
+    const token = JSON.parse(localStorage.getItem("account"));
+    if (!token) {
+      return; // Retorna se não houver token
+    }
+
+    const usuarioID = (await userToken(token)).token;
+
+    try {
+      const response = await userHasBook(usuarioID.usuarioId, props.bookID);
+      setHasBook(response);
+
+      
+      const btnLer = document.getElementById("btnLer");
+
+      if (response.loggedIn) {
+        btnLer.textContent = "Ler";
+      }
+
+    } catch (error) {
+      console.error("Erro ao buscar os livros:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBook();
+  }, []); // Execute apenas uma vez quando o componente é montado
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("account"));
-    // console.log(token);
-    const fetchData = async () => {
-      const usuarioID = (await userToken(token)).token;
-      console.log(usuarioID)
-      try {
-        const response = await userHasBook(usuarioID.usuarioId,props.bookID);
-        console.log(await userHasBook(usuarioID.usuarioId,props.bookID));
-        setHasBook(response);
-      } catch (error) {
-        console.error("Erro ao buscar os livros:", error);
-      }
-    };
-
-    fetchData();
-  }, [props.bookID]);
-
-
-  const [loged, setLoged] = useState(false)
-
-  useEffect(() => {
-
-    const token =JSON.parse(localStorage.getItem("account"))
-    console.log(token)
 
     const fetchData = async () => {
       try {
         const response = await isLogged(token);
-        console.log( await isLogged( token))
         setLoged(response);
       } catch (error) {
-        console.error('Erro no login:', error);
+        console.error("Erro no login:", error);
       }
     };
-  
+
     fetchData();
   }, []);
 
-  
-
-  const navigate = useNavigate()
   const handleClick = async () => {
-    const token =JSON.parse(localStorage.getItem("account"))
-    console.log(token)
+    await fetchBook();
+    const token = JSON.parse(localStorage.getItem("account"));
 
-    if(hasBook.loggedIn){
-      return navigate("reading")
+    if (!loged) {
+      console.log("não logado");
+      return navigate("/login");
     }
 
+    
 
-     if(!loged){
-        return navigate("/login")
-     }
+    const btntxt = document.getElementById("btnLer")
+
+    if(btntxt.textContent === "Ler"){
+      navigate("reading")
+    }
 
     try {
-      const usuarioID = await userToken(token)
-      console.log(usuarioID.token.usuarioId)
-      console.log(props.bookID)
-      const response = await addBookToUser( props.bookID ,usuarioID.token.usuarioId);
+      console.log("a");
+      const usuarioID = await userToken(token);
+      console.log(usuarioID.token.usuarioId);
+      console.log(props.bookID);
+      const response = await addBookToUser(
+        props.bookID,
+        usuarioID.token.usuarioId
+      );
       console.log(response);
+
+      // Atualize o texto do botão aqui após a adição do livro
+      const btnLer = document.getElementById("btnLer");
+      btnLer.textContent = "Ler";
+
       // Adicione aqui a lógica que você quer que seja executada após a adição do livro
     } catch (error) {
-      console.error('Erro ao adicionar o livro:', error);
+      console.error("Erro ao adicionar o livro:", error);
     }
   };
 
-
-
-  return(
+  return (
     <div className={styles.container}>
       <div className={styles.displayBook}>
         <div className={styles.bookImage}>
@@ -90,13 +110,15 @@ function Book(props){
           <h2 className={styles.booktitle}>{props.title}</h2>
           <h4>{props.authors}</h4>
           <p className={styles.bookDescription}>{props.description}</p>
-          <button className={styles.btnBuy} onClick={handleClick}>{hasBook.loggedIn ? 'Ler' : 'Comprar'}</button>
-          
+          <button id="btnLer" className={styles.btnBuy} onClick={handleClick}>
+            {hasBook.loggedIn ? "Ler" : "Comprar"}
+          </button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
+export { Book };
 
-export {Book}
+

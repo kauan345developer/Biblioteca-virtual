@@ -9,13 +9,13 @@ function UsuarioPage() {
   const clearLocalStorage = () => {
     localStorage.clear();
     history("/");
-  }
+  };
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("account"));
-    console.log(token);
+    // console.log(token);
     const fetchData = async () => {
-      const usuarioID = await userToken(token);
+      const usuarioID = (await userToken(token)).token;
       try {
         const response = await userBookShelf(usuarioID.usuarioId);
         console.log(await userBookShelf(usuarioID.usuarioId));

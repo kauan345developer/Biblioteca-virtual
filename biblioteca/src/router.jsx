@@ -12,6 +12,7 @@ import { Reading } from "./pages/readingPage";
 import { Login } from "./pages/Login";
 import { Cadastro } from "./pages/Cadastro";
 import { Catalogo } from "./pages/Catalogo";
+import { UsuarioPage } from "./pages/usuarioPage";
 
 const router  = createBrowserRouter([
   {
@@ -59,6 +60,9 @@ const router  = createBrowserRouter([
   },{
     path:"cadastro",
     element:<Cadastro/>
+  },{
+    path:"usuario/:id",
+    element:<UsuarioPage/>
   }
 ])
 

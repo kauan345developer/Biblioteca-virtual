@@ -1,0 +1,21 @@
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .userBookShelf {
+    .userIMG {
+      img {
+        width: 7rem;
+        height: 7rem;
+        border-radius: 50%;
+      }
+    }
+    .bookShelf {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 14rem);
+      max-height: 500px; /* Defina a altura máxima desejada para a div */
+      overflow-y: auto;
+    }
+  }
+}

@@ -9,7 +9,7 @@ function CreateBook() {
   const[title,setTitle] = useState("")
   const[author,setAuthor] = useState("")
   const[description,setDescription] = useState("")
-
+  const[editora,setEditora] = useState("")
     const dados = {
       id: useId(),
       title: title,
@@ -39,6 +39,13 @@ function CreateBook() {
           />
         </div>
         
+        <div>
+          <label htmlFor="editor">Autores</label>
+          <input 
+            type="text" name="editora" id="editora" 
+            value={author} onChange={(e) => setEditora(e.target.value)}
+          />
+        </div>
 
         <div>
           <label htmlFor="image">Imagem</label>
@@ -46,13 +53,18 @@ function CreateBook() {
         </div>
 
         <div>
+          <label htmlFor="epub">Arquivo Epub</label>
+          <input type="file" name="epub" id="epub" />
+        </div>
+
+        <div>
           <label htmlFor="Descricao">Descrição</label>
           <textarea 
-          name="" id="" cols="130" rows="4"
+          name="" id="" cols="41" rows="4"
           value={description} onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
-      <button >enviar</button>
+      <button>enviar</button>
     </div>
   )
 }

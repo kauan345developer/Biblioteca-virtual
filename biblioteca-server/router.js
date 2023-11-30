@@ -19,7 +19,7 @@ import {
 } from "./DB/functions.js";
 import { error } from "console";
 import { Sequelize } from "sequelize";
-const bodyParser = require('body-parser');
+const bodyParser = import('body-parser')
 const app = express();
 const port = 3000;
 app.use(cors());

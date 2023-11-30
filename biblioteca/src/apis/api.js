@@ -1,5 +1,5 @@
 // frontend/src/utils/api.js
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = "http://localhost:3000";
 
 async function getAllBooks() {
   const response = await fetch(`${API_BASE_URL}/api/books/searchById/a`);
@@ -13,15 +13,45 @@ async function getBookById(id) {
 
 // Adicione outras funções para as chamadas à API
 
-async function getMostSold(){
+async function getMostSold() {
   const response = await fetch(`${API_BASE_URL}/api/books/mostSold?limit=12`);
   return await response.json();
 }
 
-
-async function searchByName(name){
-  const response = await fetch(`${API_BASE_URL}/api/books/searchByName/${name}?limit=4`);
+async function searchByName(name) {
+  const response = await fetch(
+    `${API_BASE_URL}/api/books/searchByName/${name}?limit=4`
+  );
   return await response.json();
 }
 
-export { getAllBooks, getBookById,getMostSold,searchByName };
+async function userHasBook(userID, bookID) {
+  const response = await fetch(
+    `${API_BASE_URL}/api/auth/checkIfUserHasBook/${userID}/${bookID}`
+  );
+  return await response.json();
+}
+
+async function userBookShelf(userID) {
+  const response = await fetch(
+    `${API_BASE_URL}/api/auth/getAllBooksFromUser/${userID}`
+  );
+  return await response.json();
+}
+
+async function userToken(token) {
+  const response = await fetch(
+    `${API_BASE_URL}/api/auth/checkIfUserIsLoggedIn/${token}`
+  );
+  return await response.json();
+}
+
+export {
+  getAllBooks,
+  getBookById,
+  getMostSold,
+  searchByName,
+  userHasBook,
+  userBookShelf,
+  userToken,
+};

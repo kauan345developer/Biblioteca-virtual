@@ -10,7 +10,12 @@ import {
     livros_generos,
     livros_autores,
     usuarios_livros,
+    usuario_tokens,
 } from "./structure.js";
+
+async function generateRandomString(length) {
+    return [...Array(length)].map(() => Math.random().toString(36)[2]).join("");
+}
 
 async function getAllBooks() {
     return await livros.findAll();
@@ -127,7 +132,25 @@ async function checkIfUserHasBook(userId, bookId) {
 }
 
 async function generateTokenForUser(userId) {
-    return await usuarios.findOne({ where: { id: userId } }).then((user) => {});
+    return await usuarios
+        .findOne({ where: { id: userId } })
+        .then(async (user) => {
+            const token = await generateRandomString(20);
+            await usuario_tokens.create({ token: token, usuarioId: userId });
+            return token;
+        });
+}
+
+async function checkIfUserIsLoggedIn(token) {
+    return await usuario_tokens
+        .findOne({ where: { token: token } })
+        .then(async (token) => {
+            if (token) {
+                return token;
+            } else {
+                return false;
+            }
+        });
 }
 
 export {
@@ -139,6 +162,7 @@ export {
     deleteBook,
     incrementView,
     generateTokenForUser,
+    checkIfUserIsLoggedIn,
     getBookByName,
     addBookToUser,
     checkIfUserHasBook,

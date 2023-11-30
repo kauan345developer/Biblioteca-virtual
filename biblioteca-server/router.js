@@ -13,6 +13,7 @@ import {
     getAllBooksFromUser,
     generateTokenForUser,
     checkIfUserHasBook,
+    checkIfUserIsLoggedIn,
     createUser,
     getUserByEmail,
 } from "./DB/functions.js";
@@ -151,6 +152,7 @@ app.post("/api/users/login", async (req, res) => {
     try {
         const user = await getUserByEmail(email);
         if (user && user.senha === password) {
+            const token = await generateTokenForUser(user.id);
             res.status(200).send({
                 success: true,
                 message: "Login bem-sucedido",
@@ -184,11 +186,15 @@ app.get("/api/auth/checkIfUserHasBook/:userId/:bookId", async (req, res) => {
     const { userId, bookId } = req.params;
     try {
         await checkIfUserHasBook(userId, bookId).then((query) => {
-            console.log(query);
             if (query) {
-                res.status(200).send("true");
+                res.status(200).send({
+                    loggedIn: true,
+                    id: query.usuarioId,
+                });
             } else {
-                res.status(200).send("false");
+                res.status(200).send({
+                    loggedIn: false,
+                });
             }
         });
     } catch {
@@ -201,6 +207,17 @@ app.post("/api/auth/addBookToUser/:bookId/:userId", async (req, res) => {
     try {
         await addBookToUser(bookId, userId);
         res.status(200).send(`Livro ${bookId} adicionado ao usuário ${userId}`);
+    } catch {
+        console.log(error);
+    }
+});
+
+app.get("/api/auth/checkIfUserIsLoggedIn/:token", async (req, res) => {
+    const { token } = req.params;
+    try {
+        await checkIfUserIsLoggedIn(token).then((query) => {
+            res.status(200).send(query);
+        });
     } catch {
         console.log(error);
     }

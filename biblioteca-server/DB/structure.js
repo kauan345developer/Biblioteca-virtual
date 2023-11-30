@@ -136,8 +136,8 @@ const usuarios_livros = client.define(
     { timestamps: false }
 );
 
-const usuarios_token = client.define(
-    "usuarios_token",
+const usuario_tokens = client.define(
+    "usuario_tokens",
     {
         usuarioId: {
             type: Sequelize.INTEGER,
@@ -166,8 +166,6 @@ autores.belongsToMany(livros, {
 livros.belongsToMany(usuarios, { through: usuarios_livros });
 usuarios.belongsToMany(livros, { through: usuarios_livros });
 
-usuarios.hasMany(usuarios_token);
-
 export {
     livros,
     generos,
@@ -176,5 +174,5 @@ export {
     livros_generos,
     livros_autores,
     usuarios_livros,
-    usuarios_token,
+    usuario_tokens,
 };

@@ -19,7 +19,7 @@ import {
 } from "./DB/functions.js";
 import { error } from "console";
 import { Sequelize } from "sequelize";
-const bodyParser = require('body-parser');
+
 const app = express();
 const port = 3000;
 app.use(cors());
@@ -172,20 +172,47 @@ app.post("/api/users/login", async (req, res) => {
 
 //cadastro livro -------------------------------------------
 
-app.post('/api/books/cadastro', async (req, res) => {
-    const { titulo, editora, sinopse } = req.body;
+app.post("/api/books/cadastro", async (req, res) => {
+    const { titulo, sinopse, editora, autores, generos, capa, epub } = req.body;
 
     try {
-        if (!titulo || !editora || !sinopse) {
-            return res.status(400).json({ success: false, message: 'Preencha todos os campos.' });
+        if (
+            !titulo ||
+            !sinopse ||
+            !editora ||
+            !autores ||
+            !generos ||
+            !capa ||
+            !epub
+        ) {
+            return res
+                .status(400)
+                .json({ success: false, message: "Preencha todos os campos." });
         }
 
-        const novoLivro = await createBook({ titulo, editora, sinopse });
+        await createBook({ titulo, sinopse, editora })
+            .then(async (createdLivro) => {
+                await createdLivro.addAutores(autores);
+                await createdLivro.addGeneros(generos);
 
-        res.status(201).json({ success: true, message: 'Livro cadastrado com sucesso!', livro: novoLivro });
+                const capaPath = `./public/livros/capas/${createdLivro.id}.jpg`;
+                const epubPath = `./public/livros/epubs/${createdLivro.id}.epub`;
+
+                await fs.writeFileSync(capaPath, capa);
+                await fs.writeFileSync(epubPath, epub);
+            })
+            .then(() => {
+                res.status(200).json({
+                    success: true,
+                    message: "Livro cadastrado com sucesso.",
+                });
+            });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ success: false, message: 'Erro no cadastro do livro.' });
+        res.status(500).json({
+            success: false,
+            message: "Erro no cadastro do livro.",
+        });
     }
 });
 

@@ -14,9 +14,11 @@ const livros = client.define(
         },
         views: {
             type: Sequelize.INTEGER,
+            defaultValue: 0,
         },
         vendas: {
             type: Sequelize.INTEGER,
+            defaultValue: 0,
         },
         disponivel: {
             type: Sequelize.BOOLEAN,

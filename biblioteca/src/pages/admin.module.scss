@@ -5,10 +5,9 @@
   align-items: center;
   min-height: 100vh;
   padding: 0 2rem;
-  
 }
 
-.containerAdmin{
+.containerAdmin {
   display: flex;
   // border: 1px solid red;
   align-items: center;
@@ -43,9 +42,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: .2rem;
+    margin-top: 0.2rem;
 
-    a{
+    a {
       text-decoration: none;
     }
 
@@ -60,10 +59,25 @@
         color: #0055aa;
       }
     }
+
+    .btnSair {
+      padding: 10px;
+      height: 3rem;
+      background-color: #9d0c06;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-transform: uppercase;
+      &:hover {
+        background-color: #800000;
+      }
+    }
   }
 }
 
-.content{
+.content {
   height: auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -663,7 +663,7 @@ const biblioteca = {
             editora: "Principis",
             views: randomNumber(1, 1000),
             vendas: randomNumber(1, 100),
-            disponivel: true,
+            disponivel: false,
             autores: [
                 {
                     nome: "Marcos",

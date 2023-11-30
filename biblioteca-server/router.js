@@ -149,10 +149,11 @@ app.post("/api/users/login", async (req, res) => {
     try {
         const user = await getUserByEmail(email);
         if (user && user.senha === password) {
+            
             res.status(200).send({
                 success: true,
                 message: "Login bem-sucedido",
-                id: user.id
+                token: token
             });
         } else {
             res.status(401).send({

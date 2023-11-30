@@ -136,6 +136,19 @@ const usuarios_livros = client.define(
     { timestamps: false }
 );
 
+const usuarios_tokens = client.define({
+    usuarioId: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: usuarios,
+            key: "id",
+        },
+    },
+    token: {
+        type: Sequelize.TEXT,
+    },
+});
+
 // relações
 livros.belongsToMany(generos, { through: livros_generos });
 generos.belongsToMany(livros, { through: livros_generos });
@@ -157,4 +170,5 @@ export {
     livros_generos,
     livros_autores,
     usuarios_livros,
+    usuarios_tokens,
 };

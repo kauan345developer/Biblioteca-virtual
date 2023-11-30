@@ -110,7 +110,11 @@ async function getAllBooksFromUser(userId) {
         });
 }
 
-async function checkUserHasBook(userId, bookId) {}
+async function checkIfUserHasBook(userId, bookId) {
+    await usuarios.findOne({ where: { userId: userId } }).then((user) => {
+        
+    });
+}
 
 export {
     getAllBooks,

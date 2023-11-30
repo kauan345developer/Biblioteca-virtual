@@ -38,6 +38,7 @@ function Login() {
           if (data.success) {
             localStorage.setItem(`account`, JSON.stringify(data.token));
             history("/usuario");
+          } else {
             setLoginError(data.message);
           }
         });

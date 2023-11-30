@@ -2,9 +2,11 @@ import styles from "./usuarios.module.scss";
 import img from "../assets/users/user2.png";
 import { userBookShelf, userToken } from "../apis/api.js";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 function UsuarioPage() {
   const [bookItems, setBookItems] = useState([]);
+
+  const history = useNavigate();
 
   const clearLocalStorage = () => {
     localStorage.clear();
@@ -15,10 +17,13 @@ function UsuarioPage() {
     const token = JSON.parse(localStorage.getItem("account"));
     // console.log(token);
     const fetchData = async () => {
-      const usuarioID = (await userToken(token)).token;
+      const usuarioID = await userToken(token);
+      if (usuarioID.isAdmin) {
+        history("/admin");
+      }
       try {
-        const response = await userBookShelf(usuarioID.usuarioId);
-        console.log(await userBookShelf(usuarioID.usuarioId));
+        const response = await userBookShelf(usuarioID.token.usuarioId);
+        console.log(await userBookShelf(usuarioID.token.usuarioId));
         setBookItems(response);
       } catch (error) {
         console.error("Erro ao buscar os livros:", error);

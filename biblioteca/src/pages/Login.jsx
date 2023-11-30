@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./login.module.scss";
 import logo from "../assets/LogoBiblioteca.png";
 
 function Login() {
   const [loginData, setLoginData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleInputChange = (e) => {
@@ -23,36 +23,36 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-        await fetch('http://localhost:3000/api/users/login', {
-        method: 'POST',
+      await fetch("http://localhost:3000/api/users/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(loginData),
-      }).then(async (response) => {
-        return await response.json();
-      }).then(async (data) => {
-        if (data.success) {
-          localStorage.setItem(`account`, JSON.stringify(data.token));
-          history("/user");
-          setLoginError(data.message);
-        }
       })
-
-      
+        .then(async (response) => {
+          return await response.json();
+        })
+        .then(async (data) => {
+          if (data.success) {
+            localStorage.setItem(`account`, JSON.stringify(data.token));
+            history("/usuario");
+            setLoginError(data.message);
+          }
+        });
     } catch (error) {
-      console.error('Erro ao fazer login:', error.message);
-      setLoginError('Erro ao fazer login. Tente novamente.');
+      console.error("Erro ao fazer login:", error.message);
+      setLoginError("Erro ao fazer login. Tente novamente.");
     }
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.login}>
-        <Link to = "/">
-        <div>
-          <img src={logo} alt="" />
-        </div>
+        <Link to="/">
+          <div>
+            <img src={logo} alt="" />
+          </div>
         </Link>
         <form onSubmit={handleLogin} className={styles.form}>
           <div>
@@ -79,8 +79,14 @@ function Login() {
           <button type="submit">Login</button>
         </form>
         <div>
-        <span>
-            Cadastre-se, <a style={{ textDecoration: 'none', fontWeight: 'bold' }} href="/cadastro">Clique Aqui</a>
+          <span>
+            Cadastre-se,{" "}
+            <a
+              style={{ textDecoration: "none", fontWeight: "bold" }}
+              href="/cadastro"
+            >
+              Clique Aqui
+            </a>
           </span>
         </div>
       </div>

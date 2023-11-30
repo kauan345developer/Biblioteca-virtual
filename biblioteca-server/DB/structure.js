@@ -34,9 +34,6 @@ const generos = client.define(
         nome: {
             type: Sequelize.TEXT,
         },
-        descricao: {
-            type: Sequelize.TEXT,
-        },
     },
     { timestamps: false }
 );

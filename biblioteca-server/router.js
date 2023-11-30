@@ -16,14 +16,19 @@ import {
     checkIfUserIsLoggedIn,
     createUser,
     getUserByEmail,
+    createBook,
 } from "./DB/functions.js";
 import { error } from "console";
 import { Sequelize } from "sequelize";
+import fs from "fs";
+import fileUpload from "express-fileupload";
+import { create } from "domain";
 
 const app = express();
 const port = 3000;
 app.use(cors());
 app.use(json());
+app.use(fileUpload());
 
 app.get("/api/books/searchById/:id", async (req, res) => {
     const id = parseInt(req.params.id);
@@ -173,38 +178,31 @@ app.post("/api/users/login", async (req, res) => {
 //cadastro livro -------------------------------------------
 
 app.post("/api/books/cadastro", async (req, res) => {
-    const { titulo, sinopse, editora, autores, generos, capa, epub } = req.body;
-
+    const bookInfo = req.body;
     try {
         if (
-            !titulo ||
-            !sinopse ||
-            !editora ||
-            !autores ||
-            !generos ||
-            !capa ||
-            !epub
+            !bookInfo.titulo ||
+            !bookInfo.sinopse ||
+            !bookInfo.editora ||
+            !bookInfo.autores ||
+            !bookInfo.generos ||
+            !bookInfo.capa ||
+            !bookInfo.ePub
         ) {
             return res
                 .status(400)
                 .json({ success: false, message: "Preencha todos os campos." });
         }
 
-        await createBook({ titulo, sinopse, editora })
+        await createBook(bookInfo)
             .then(async (createdLivro) => {
-                await createdLivro.addAutores(autores);
-                await createdLivro.addGeneros(generos);
-
-                const capaPath = `./public/livros/capas/${createdLivro.id}.jpg`;
-                const epubPath = `./public/livros/epubs/${createdLivro.id}.epub`;
-
-                await fs.writeFileSync(capaPath, capa);
-                await fs.writeFileSync(epubPath, epub);
+                return createdLivro.id;
             })
-            .then(() => {
+            .then((id) => {
                 res.status(200).json({
                     success: true,
                     message: "Livro cadastrado com sucesso.",
+                    bookId: id,
                 });
             });
     } catch (err) {
@@ -213,6 +211,28 @@ app.post("/api/books/cadastro", async (req, res) => {
             success: false,
             message: "Erro no cadastro do livro.",
         });
+    }
+});
+
+app.post("/api/books/upload/:bookId", async (req, res) => {
+    const { bookId } = req.params;
+    try {
+        let ePub = req.files.ePub;
+        let capa = req.files.capa;
+
+        ePub.mv(`./public/livros/epubs/${bookId}.epub`);
+        capa.mv(`./public/livros/capas/${bookId}.png`);
+
+        res.status(200).json({
+            success: true,
+            message: "Arquivos upados com sucesso.",
+        });
+    } catch {
+        res.status(500).json({
+            success: false,
+            message: "Erro no upload do livro.",
+        });
+        console.log(error);
     }
 });
 
@@ -276,8 +296,8 @@ app.use("/api/books/capas", express.static("./public/livros/capas"));
 app.use("/api/books/read", express.static("./public/livros/epubs"));
 
 try {
-    app.listen(3000);
-    console.log("Server running on port 3000\nhttp://localhost:3000");
+    app.listen(port);
+    console.log(`Server running on port ${port}\nhttp://localhost:${port}`);
 } catch {
     console.log("Error on server");
 }

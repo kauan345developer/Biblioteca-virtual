@@ -33,13 +33,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Ficção Científica",
-                    descricao:
-                        "Exploração de conceitos científicos e tecnológicos em tramas imaginativas.",
                 },
                 {
                     nome: "Fantasia",
-                    descricao:
-                        "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
                 },
             ],
         },
@@ -59,13 +55,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas centradas em relacionamentos interpessoais e emoções.",
                 },
                 {
                     nome: "Mistério",
-                    descricao:
-                        "Enredos com elementos de suspense e resolução de enigmas.",
                 },
             ],
         },
@@ -85,13 +77,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas centradas em relacionamentos interpessoais e emoções.",
                 },
                 {
                     nome: "Mistério",
-                    descricao:
-                        "Enredos com elementos de suspense e resolução de enigmas.",
                 },
             ],
         },
@@ -111,13 +99,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas centradas em relacionamentos interpessoais e emoções.",
                 },
                 {
                     nome: "Fantasia",
-                    descricao:
-                        "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
                 },
             ],
         },
@@ -137,13 +121,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas centradas em relacionamentos interpessoais e emoções.",
                 },
                 {
                     nome: "Fantasia",
-                    descricao:
-                        "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
                 },
             ],
         },
@@ -163,13 +143,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas centradas em relacionamentos interpessoais e emoções.",
                 },
                 {
                     nome: "Fantasia",
-                    descricao:
-                        "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
                 },
             ],
         },
@@ -189,13 +165,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas centradas em relacionamentos interpessoais e emoções.",
                 },
                 {
                     nome: "Fantasia",
-                    descricao:
-                        "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
                 },
             ],
         },
@@ -215,13 +187,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Drama",
-                    descricao:
-                        "Narrativas que exploram situações emocionais intensas e complexas.",
                 },
                 {
                     nome: "Histórico",
-                    descricao:
-                        "Enredos ambientados em períodos passados, frequentemente com base em eventos reais.",
                 },
             ],
         },
@@ -241,12 +209,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Psicologia",
-                    descricao:
-                        "Exploração de processos mentais e comportamentais humanos.",
                 },
                 {
                     nome: "Não Ficção",
-                    descricao: "Narrativas baseadas em fatos e eventos reais.",
                 },
             ],
         },
@@ -266,13 +231,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Aventura",
-                    descricao:
-                        "Narrativas emocionantes e cheias de ação, frequentemente envolvendo viagens e descobertas.",
                 },
                 {
                     nome: "Ficção Científica",
-                    descricao:
-                        "Exploração de conceitos científicos e tecnológicos em tramas imaginativas.",
                 },
             ],
         },
@@ -292,13 +253,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Aventura",
-                    descricao:
-                        "Narrativas emocionantes e cheias de ação, frequentemente envolvendo viagens e descobertas.",
                 },
                 {
                     nome: "Mistério",
-                    descricao:
-                        "Enredos com elementos de suspense e resolução de enigmas.",
                 },
             ],
         },
@@ -318,12 +275,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Fantasia",
-                    descricao:
-                        "Envolvimento de elementos mágicos e mundos imaginários.",
                 },
                 {
                     nome: "Infantil",
-                    descricao: "Orientado para crianças e jovens leitores.",
                 },
             ],
         },
@@ -343,12 +297,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Conto de Fadas",
-                    descricao:
-                        "Narrativas que envolvem elementos mágicos e moralidades.",
                 },
                 {
                     nome: "Infantil",
-                    descricao: "Orientado para crianças e jovens leitores.",
                 },
             ],
         },
@@ -368,12 +319,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Conto de Fadas",
-                    descricao:
-                        "Narrativas que envolvem elementos mágicos e moralidades.",
                 },
                 {
                     nome: "Infantil",
-                    descricao: "Orientado para crianças e jovens leitores.",
                 },
             ],
         },
@@ -393,12 +341,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Fantasia",
-                    descricao:
-                        "Envolvimento de elementos mágicos, criaturas místicas e mundos imaginários.",
                 },
                 {
                     nome: "Aventura",
-                    descricao: "Narrativas emocionantes e cheias de ação.",
                 },
             ],
         },
@@ -418,8 +363,6 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Fantasia",
-                    descricao:
-                        "Envolvimento de elementos mágicos, criaturas místicas e mundos imaginários.",
                 },
                 {
                     nome: "Aventura",

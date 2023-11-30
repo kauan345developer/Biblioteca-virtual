@@ -153,12 +153,33 @@ async function checkIfUserIsLoggedIn(token) {
         });
 }
 
-async function createBook({ titulo, editora, sinopse }) {
+async function createBook(bookInfo) {
     try {
-        const novoLivro = await livros.create({ titulo, editora, sinopse });
-        return novoLivro;
+        return await livros
+            .create({
+                titulo: bookInfo.titulo,
+                editora: bookInfo.editora,
+                sinopse: bookInfo.sinopse,
+            })
+            .then(async (createdLivro) => {
+                for (const autor of bookInfo.autores) {
+                    const [createdAutor, boolean] = await autores.findOrCreate({
+                        where: { nome: autor.nome, sobrenome: autor.sobrenome },
+                    });
+                    await createdLivro.addAutores(createdAutor);
+                }
+
+                for (const genero of bookInfo.generos) {
+                    const [createdGenero, boolean] = await generos.findOrCreate({
+                        where: { nome: genero.nome },
+                    });
+                    await createdLivro.addGeneros(createdGenero);
+
+                    return createdLivro;
+                }
+            });
     } catch (error) {
-        console.error('Erro ao cadastrar livro:', error);
+        console.error("Erro ao cadastrar livro:", error);
         throw error;
     }
 }

@@ -15,6 +15,11 @@
   width: 80%;
   // max-width: 800px;
   padding: 1rem;
+
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+    width: 100%;
+  }
 }
 
 .bookImage {

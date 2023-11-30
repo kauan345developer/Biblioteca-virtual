@@ -31,13 +31,11 @@ function Book(props) {
       const response = await userHasBook(usuarioID.usuarioId, props.bookID);
       setHasBook(response);
 
-      
       const btnLer = document.getElementById("btnLer");
 
       if (response.loggedIn) {
         btnLer.textContent = "Ler";
       }
-
     } catch (error) {
       console.error("Erro ao buscar os livros:", error);
     }
@@ -48,7 +46,7 @@ function Book(props) {
     if (!props.disponivel) {
       btnLer.innerHTML = "Indisponível";
     }
-  }, []); 
+  }, []);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("account"));
@@ -69,7 +67,7 @@ function Book(props) {
     await fetchBook();
     const token = JSON.parse(localStorage.getItem("account"));
 
-    console.log(props)
+    console.log(props);
 
     if (!props.disponivel) {
       return;
@@ -80,16 +78,13 @@ function Book(props) {
       return navigate("/login");
     }
 
-    
+    const btntxt = document.getElementById("btnLer");
 
-    const btntxt = document.getElementById("btnLer")
-
-    if(btntxt.textContent === "Ler"){
-      navigate("reading")
+    if (btntxt.textContent === "Ler") {
+      navigate("reading");
     }
 
     try {
-      console.log("a");
       const usuarioID = await userToken(token);
       console.log(usuarioID.token.usuarioId);
       console.log(props.bookID);
@@ -129,5 +124,3 @@ function Book(props) {
 }
 
 export { Book };
-
-

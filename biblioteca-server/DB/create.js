@@ -366,7 +366,6 @@ const biblioteca = {
                 },
                 {
                     nome: "Aventura",
-                    descricao: "Narrativas emocionantes e cheias de ação.",
                 },
             ],
         },
@@ -386,13 +385,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance Erótico",
-                    descricao:
-                        "Narrativas que enfocam explicitamente temas de desejo, paixão e intimidade.",
                 },
                 {
                     nome: "Drama",
-                    descricao:
-                        "Narrativas centradas em conflitos emocionais e relacionamentos complexos.",
                 },
             ],
         },
@@ -412,13 +407,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas centradas nas experiências e emoções dos personagens.",
                 },
                 {
                     nome: "Ficção",
-                    descricao:
-                        "Obras literárias que exploram mundos imaginários ou situações inventadas.",
                 },
             ],
         },
@@ -438,13 +429,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Contos",
-                    descricao:
-                        "Narrativas curtas que exploram eventos e personagens específicos, frequentemente com um foco temático.",
                 },
                 {
                     nome: "Ficção",
-                    descricao:
-                        "Obras literárias que exploram mundos imaginários ou situações inventadas.",
                 },
             ],
         },
@@ -464,13 +451,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas longas e detalhadas que exploram os eventos na vida dos personagens.",
                 },
                 {
                     nome: "Ficção",
-                    descricao:
-                        "Obras literárias que exploram mundos imaginários ou situações inventadas.",
                 },
             ],
         },
@@ -490,13 +473,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Ficção",
-                    descricao:
-                        "Obras literárias que exploram mundos imaginários ou situações inventadas.",
                 },
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas longas e detalhadas que exploram os eventos na vida dos personagens.",
                 },
             ],
         },
@@ -516,13 +495,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Contos",
-                    descricao:
-                        "Narrativas curtas que exploram eventos e personagens específicos, frequentemente com um foco temático.",
                 },
                 {
                     nome: "Ficção",
-                    descricao:
-                        "Obras literárias que exploram mundos imaginários ou situações inventadas.",
                 },
             ],
         },
@@ -542,12 +517,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Poesia",
-                    descricao:
-                        "Expressão artística que utiliza palavras para evocar emoções e imagens, frequentemente seguindo regras métricas e rítmicas.",
                 },
                 {
                     nome: "Infantil",
-                    descricao: "Orientado para crianças e jovens leitores.",
                 },
             ],
         },
@@ -567,13 +539,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas longas e detalhadas que exploram os eventos na vida dos personagens.",
                 },
                 {
                     nome: "Regionalismo",
-                    descricao:
-                        "Ênfase nas características e cultura específicas de uma determinada região.",
                 },
             ],
         },
@@ -593,12 +561,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas longas e detalhadas que exploram os eventos na vida dos personagens.",
                 },
                 {
                     nome: "Aventura",
-                    descricao: "Narrativas emocionantes e cheias de ação.",
                 },
             ],
         },
@@ -618,13 +583,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Novela",
-                    descricao:
-                        "Narrativa mais curta do que um romance, mas mais longa do que um conto, frequentemente focada em um único incidente ou personagem.",
                 },
                 {
                     nome: "Ficção Moral",
-                    descricao:
-                        "Exploração de questões éticas e morais por meio da narrativa.",
                 },
             ],
         },
@@ -644,13 +605,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance Erótico",
-                    descricao:
-                        "Narrativas que enfocam explicitamente temas de desejo, paixão e intimidade.",
                 },
                 {
                     nome: "Drama",
-                    descricao:
-                        "Narrativas centradas em conflitos emocionais e relacionamentos complexos.",
                 },
             ],
         },
@@ -670,13 +627,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Romance Erótico",
-                    descricao:
-                        "Narrativas que enfocam explicitamente temas de desejo, paixão e intimidade.",
                 },
                 {
                     nome: "Drama",
-                    descricao:
-                        "Narrativas centradas em conflitos emocionais e relacionamentos complexos.",
                 },
             ],
         },
@@ -697,13 +650,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Ficção Científica",
-                    descricao:
-                        "Exploração de conceitos científicos e tecnológicos em tramas imaginativas.",
                 },
                 {
                     nome: "Romance",
-                    descricao:
-                        "Narrativas centradas em relacionamentos interpessoais e emoções.",
                 },
             ],
         },
@@ -724,13 +673,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Ficção Científica",
-                    descricao:
-                        "Exploração de conceitos científicos e tecnológicos em tramas imaginativas.",
                 },
                 {
                     nome: "Fantasia",
-                    descricao:
-                        "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
                 },
             ],
         },
@@ -751,13 +696,9 @@ const biblioteca = {
             generos: [
                 {
                     nome: "Ficção Científica",
-                    descricao:
-                        "Exploração de conceitos científicos e tecnológicos em tramas imaginativas.",
                 },
                 {
                     nome: "Fantasia",
-                    descricao:
-                        "Envolvimento de elementos mágicos, seres sobrenaturais ou mundos imaginários.",
                 },
             ],
         },
@@ -767,6 +708,7 @@ const biblioteca = {
             nome: "João",
             email: "joao@gmail.com",
             senha: "joao123",
+            admin: true,
         },
         {
             nome: "Maria",
@@ -795,7 +737,7 @@ try {
 
         for (const genero of livro.generos) {
             const [createdGenero, boolean] = await generos.findOrCreate({
-                where: { nome: genero.nome, descricao: genero.descricao },
+                where: { nome: genero.nome },
             });
             await createdLivro.addGeneros(createdGenero);
         }

@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { Book } from "../../../components/Book";
 import { StockContext } from "../../../contexts/StockBookContext";
 import styles from "./styles.module.scss";
-import image from "../../../../../biblioteca-server/public/livros/capas/1.png";
+// import image from "../../../../../biblioteca-server/public/livros/capas/1.png";
 import { Link } from "react-router-dom";
 
 function BookShelf(props) {

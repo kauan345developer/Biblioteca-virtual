@@ -46,12 +46,19 @@ async function userToken(token) {
   return await response.json();
 }
 
-async function addBookToUser(bookID,userID) {
+async function addBookToUser(bookID, userID) {
   const response = await fetch(
     `${API_BASE_URL}/api/auth/addBookToUser/${bookID}/${userID}`,
-    { method: 'POST' } // Adicionado este objeto de opções
+    { method: "POST" } // Adicionado este objeto de opções
   );
   return await response;
+}
+
+async function isLogged(token) {
+  const response = await fetch(
+    `${API_BASE_URL}/api/auth/checkIfUserIsLoggedIn/${token}`
+  );
+  return await response.json();
 }
 
 export {
@@ -62,5 +69,6 @@ export {
   userHasBook,
   userBookShelf,
   userToken,
-  addBookToUser
+  addBookToUser,
+  isLogged
 };

@@ -2,7 +2,7 @@ import styles from "./usuarios.module.scss";
 import img from "../assets/users/user2.png";
 import { userBookShelf, userToken } from "../apis/api.js";
 import { useEffect, useState } from "react";
-import{Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 function UsuarioPage() {
   const [bookItems, setBookItems] = useState([]);
 
@@ -57,15 +57,21 @@ function UsuarioPage() {
             };
 
             return (
-              <div key={book.id}>
-                <MeuComponente />
-                <p>{book.titulo}</p>
-              </div>
+              <Link
+                key={book.id}
+                style={{ textDecoration: "none" }}
+                to={`/book/${book.id}`}
+              >
+                <div>
+                  <MeuComponente />
+                  <p>{book.titulo}</p>
+                </div>
+              </Link>
             );
           })}
         </div>
         <Link to="/">
-        <button>Sair</button>
+          <button>Sair</button>
         </Link>
       </div>
     </div>

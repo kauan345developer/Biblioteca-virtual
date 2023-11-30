@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate,Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from "./login.module.scss";
 import logo from "../assets/LogoBiblioteca.png";
 
@@ -18,7 +18,7 @@ function Login() {
   };
 
   const [loginError, setLoginError] = useState(null);
-  const history = useNavigate();
+  // const history = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -75,6 +75,7 @@ function Login() {
               onChange={handleInputChange}
             />
           </div>
+          
           {loginError && <div className={styles.error}>{loginError}</div>}
           <button type="submit">Login</button>
         </form>

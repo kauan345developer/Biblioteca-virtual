@@ -2,15 +2,19 @@ import styles from "./usuarios.module.scss";
 import img from "../assets/users/user2.png";
 import { userBookShelf, userToken } from "../apis/api.js";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 function UsuarioPage() {
   const [bookItems, setBookItems] = useState([]);
 
+  const clearLocalStorage = () => {
+    localStorage.clear();
+  };
+
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("account"));
-    console.log(token);
+    // console.log(token);
     const fetchData = async () => {
-      const usuarioID = await userToken(token);
+      const usuarioID = (await userToken(token)).token;
       try {
         const response = await userBookShelf(usuarioID.usuarioId);
         console.log(await userBookShelf(usuarioID.usuarioId));
@@ -71,7 +75,7 @@ function UsuarioPage() {
           })}
         </div>
         <Link to="/">
-          <button>Sair</button>
+          <button onClick={clearLocalStorage}>Sair</button>
         </Link>
       </div>
     </div>

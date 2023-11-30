@@ -23,7 +23,7 @@ function Header() {
         console.log( await isLogged( token))
         setLoged(response);
       } catch (error) {
-        console.error('Erro ao buscar os livros:', error);
+        console.error('Erro no login:', error);
       }
     };
   

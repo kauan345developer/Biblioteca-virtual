@@ -12,7 +12,8 @@ import { Reading } from "./pages/readingPage";
 import { Login } from "./pages/Login";
 import { Cadastro } from "./pages/Cadastro";
 import { Catalogo } from "./pages/Catalogo";
-import { UsuarioPage } from "./pages/usuarioPage";
+import { UsuarioPage } from "./pages/UsuarioPage";
+
 
 const router  = createBrowserRouter([
   {

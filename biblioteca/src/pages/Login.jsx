@@ -34,7 +34,7 @@ function Login() {
       }).then(async (data) => {
         if (data.success) {
           localStorage.setItem(`account`, JSON.stringify(data.token));
-          // redirecionar para página de usuário
+          history("/user");
           setLoginError(data.message);
         }
       })

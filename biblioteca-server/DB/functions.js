@@ -145,8 +145,12 @@ async function checkIfUserIsLoggedIn(token) {
     return await usuario_tokens
         .findOne({ where: { token: token } })
         .then(async (token) => {
+            const user = await usuarios.findOne({ where: { id: token.usuarioId } });
             if (token) {
-                return token;
+                return {
+                    token: token,
+                    isAdmin: user.admin,
+                };
             } else {
                 return false;
             }

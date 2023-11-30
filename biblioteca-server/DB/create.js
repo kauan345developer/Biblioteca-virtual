@@ -743,13 +743,13 @@ try {
         }
     }
 
-    //   for (const usuario of biblioteca.usuarios) {
-    //     const createdUsuario = await usuarios.create(usuario);
+      for (const usuario of biblioteca.usuarios) {
+        const createdUsuario = await usuarios.create(usuario);
 
-    //     await createdUsuario.addLivros(
-    //       await livros.findOne({ where: { id: randomNumber(1, 31) } })
-    //     );
-    //   }
+        // await createdUsuario.addLivros(
+        //   await livros.findOne({ where: { id: randomNumber(1, 31) } })
+        // );
+      }
     await client.close();
 } catch (error) {
     console.log(error);

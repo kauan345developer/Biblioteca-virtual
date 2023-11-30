@@ -79,9 +79,14 @@ function UsuarioPage() {
             );
           })}
         </div>
-        <Link to="/">
-          <button onClick={clearLocalStorage}>Sair</button>
-        </Link>
+        <div className={styles.btns}>
+          <Link to="/">
+            <button className={styles.btnHome}>Home</button>
+          </Link>
+          <Link to="/">
+            <button className={styles.btnSair} onClick={clearLocalStorage}>Sair</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

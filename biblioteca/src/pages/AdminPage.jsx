@@ -45,6 +45,9 @@ function Admin() {
             <Link to="bookshelf">
               <span>Book Shelf</span>
             </Link>
+            <Link to="/">
+              <button className={styles.btnHome}>Home</button>
+            </Link>
             <Link to="/login">
               <button className={styles.btnSair} onClick={clearLocalStorage}>Sair</button>
             </Link>

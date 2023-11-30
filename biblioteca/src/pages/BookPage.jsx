@@ -53,6 +53,7 @@ useEffect(() => {
         title = {book.titulo}
         authors = {book.editora}
         description = {book.sinopse}
+        bookID= {book.id}
       >
       </Book>
     ) : (

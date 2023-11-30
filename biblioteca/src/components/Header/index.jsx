@@ -1,11 +1,36 @@
+/* eslint-disable no-unused-vars */
 import logo from "../../assets/logoBiblioteca.png";
 import styles from "./styles.module.scss";
 import searchIcon from "../../assets/icons/search.svg";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { searchByName } from "../../apis/api";
+import { searchByName,isLogged } from "../../apis/api.js";
+import userIcon from "../../assets/icons/user.svg"
 // import "../../../../biblioteca-server/public/livros/capas"
 function Header() {
+
+
+  const [loged, setLoged] = useState(false)
+
+  useEffect(() => {
+
+    const token =JSON.parse(localStorage.getItem("account"))
+    console.log(token)
+
+    const fetchData = async () => {
+      try {
+        const response = await isLogged(token);
+        console.log( await isLogged( token))
+        setLoged(response);
+      } catch (error) {
+        console.error('Erro ao buscar os livros:', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+
+
   const [valorDoCampo, setValorDoCampo] = useState("");
 
   const handleInputChange = (event) => {
@@ -20,7 +45,9 @@ function Header() {
   const handleBlur = () => {
     const inputBook = document.getElementById("searchD");
     if (inputBook) {
-      inputBook.style.display = "none";
+      setTimeout(() => {
+        inputBook.style.display = "none";
+      }, 100);
     }
   };
 
@@ -103,9 +130,20 @@ function Header() {
           <img src={searchIcon} alt="" />
         </button>
       </div>
-      <Link to="login">
-        <button className={styles.loginButton}>Login</button>
-      </Link>
+
+      {loged ? (
+        <div>
+          <Link to="usuario">
+            <img src={userIcon} alt="" />
+          </Link>
+        </div>
+      ) : (
+        <div id="loginBtn">
+          <Link to="login">
+            <button className={styles.loginButton}>Login</button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

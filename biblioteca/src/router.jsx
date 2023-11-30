@@ -61,7 +61,7 @@ const router  = createBrowserRouter([
     path:"cadastro",
     element:<Cadastro/>
   },{
-    path:"usuario/:id",
+    path:"usuario",
     element:<UsuarioPage/>
   }
 ])

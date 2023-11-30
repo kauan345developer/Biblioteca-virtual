@@ -4,6 +4,15 @@
   align-items: center;
   justify-content: center;
   .userBookShelf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 1rem;
+    margin: 1rem;
     .userIMG {
       img {
         width: 7rem;
@@ -11,11 +20,42 @@
         border-radius: 50%;
       }
     }
+    span{
+      font-weight: bold;
+    }
     .bookShelf {
+      margin-top: 1rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, 14rem);
+      grid-template-columns: repeat(auto-fit, 8.1rem);
       max-height: 500px; /* Defina a altura máxima desejada para a div */
       overflow-y: auto;
+      width: 80%;
+      gap:.7rem ;
+      div{
+        height: 14rem;
+        img{
+          width: 8rem;
+          height: 10rem;
+        }
+        text-align: center;
+      }
+    }
+
+    button {
+      grid-column: span 3; /* Ocupa duas colunas */
+      margin-top: 10px;
+      padding: 10px;
+      height: 3rem;
+      background-color: #0077cc;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-transform: uppercase;
+      &:hover {
+        background-color: #0055aa;
+      }
     }
   }
 }

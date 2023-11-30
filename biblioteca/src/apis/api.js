@@ -46,6 +46,14 @@ async function userToken(token) {
   return await response.json();
 }
 
+async function addBookToUser(bookID,userID) {
+  const response = await fetch(
+    `${API_BASE_URL}/api/auth/addBookToUser/${bookID}/${userID}`,
+    { method: 'POST' } // Adicionado este objeto de opções
+  );
+  return await response;
+}
+
 export {
   getAllBooks,
   getBookById,
@@ -54,4 +62,5 @@ export {
   userHasBook,
   userBookShelf,
   userToken,
+  addBookToUser
 };

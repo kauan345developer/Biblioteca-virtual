@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom"
 import { Home } from "./pages/Home"
 import { BookPage } from "./pages/BookPage";
-import { RootLayout } from "./pages/layout";
+import { RootLayout } from "./pages/Layout";
 import { Admin } from "./pages/AdminPage";
 import { CreateBook } from "./pages/crud/CreateBook";
 import { DeleteBook } from "./pages/crud/DeleteBook";
 import { ViewBook } from "./pages/crud/ViewBook";
 import { UpdateBook } from "./pages/crud/UpdateBook";
 import { BookShelf } from "./pages/crud/BookShelf";
-import { Reading } from "./pages/readingPage";
+import { Reading } from "./pages/ReadingPage";  // Updated import statement
 import { Login } from "./pages/Login";
 import { Cadastro } from "./pages/Cadastro";
 import { Catalogo } from "./pages/Catalogo";

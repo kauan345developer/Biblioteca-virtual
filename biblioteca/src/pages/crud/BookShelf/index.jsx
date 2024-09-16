@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { Book } from "../../../components/Book";
 import { StockContext } from "../../../contexts/StockBookContext";
 import styles from "./styles.module.scss";
-import image from "../../../../../biblioteca-server/public/livros/capas/1.png";
+// import image from "../../../../../biblioteca-server/public/livros/capas/1.png";
 import { Link } from "react-router-dom";
 
 function BookShelf(props) {
@@ -15,27 +15,28 @@ function BookShelf(props) {
   return (
     <div className={styles.container}>
       {bookItems.map((book, index) => {
-        const MeuComponente = () => {
-          const [caminhoDaImagem, setCaminhoDaImagem] = useState(null);
+        // const MeuComponente = () => {
+        //   const [caminhoDaImagem, setCaminhoDaImagem] = useState(null);
 
-          useEffect(() => {
-            import(
-              `../../../../../biblioteca-server/public/livros/capas/${book.id}.png`
-            )
-              .then((image) => {
-                setCaminhoDaImagem(image.default);
-              })
-              .catch((error) => {
-                console.error(`Error loading image: ${error}`);
-              });
-          });
+        //   useEffect(() => {
+        //     import(
+        //       `../../../../../biblioteca-server/public/livros/capas/${book.id}.png`
+        //     )
+        //       .then((image) => {
+        //         setCaminhoDaImagem(image.default);
+        //       })
+        //       .catch((error) => {
+        //         console.error(`Error loading image: ${error}`);
+        //       });
+        //   });
 
-          if (!caminhoDaImagem) {
-            return null; // or return a placeholder image
-          }
+        //   if (!caminhoDaImagem) {
+        //     return null; // or return a placeholder image
+        //   }
 
-          return <img src={caminhoDaImagem} alt="Descrição da imagem" />;
-        };
+        //   return <img src={caminhoDaImagem} alt="Descrição da imagem" />;
+        //   // return <div>Livro</div>
+        // };
 
         return (
           <Link
@@ -44,7 +45,9 @@ function BookShelf(props) {
             to={`/book/${book.id}`}
           >
             <div>
-              <MeuComponente />
+              {/* <MeuComponente /> */}
+              <img src={`http://127.0.0.1:7999/api/books/capas/${book.id}.png`} alt="" />
+
               <p>{book.titulo}</p>
             </div>
           </Link>

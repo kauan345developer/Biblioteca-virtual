@@ -25,7 +25,8 @@ function BookList(props) {
           slidesToShow: 5,
           slidesToScroll: 1,
         },
-      },{
+      },
+      {
         breakpoint: 1000,
         settings: {
           slidesToShow: 3,
@@ -38,7 +39,8 @@ function BookList(props) {
           slidesToShow: 2,
           slidesToScroll: 1,
         },
-      },{
+      },
+      {
         breakpoint: 450,
         settings: {
           slidesToShow: 1,
@@ -72,32 +74,11 @@ function BookList(props) {
       <div className={styles.books}>
         <Slider {...settings}>
           {bookItems.map((book) => {
-            const MeuComponente = () => {
-              const [caminhoDaImagem, setCaminhoDaImagem] = useState(null);
-
-              useEffect(() => {
-                import(
-                  `../../../../biblioteca-server/public/livros/capas/${book.id}.png`
-                )
-                  .then((image) => {
-                    setCaminhoDaImagem(image.default);
-                  })
-                  .catch((error) => {
-                    console.error(`Error loading image: ${error}`);
-                  });
-              });
-
-              if (!caminhoDaImagem) {
-                return null; // or return a placeholder image
-              }
-
-              return <img src={caminhoDaImagem} alt="Descrição da imagem" />;
-            };
-
             return (
               <Link to={`/book/${book.id}`} key={book.id}>
                 <div className={styles.divImgs}>
-                  <MeuComponente />
+                  {/* <MeuComponente /> */}
+                  <img src={`http://127.0.0.1:7999/api/books/capas/${book.id}.png`} alt="" />
                 </div>
               </Link>
             );

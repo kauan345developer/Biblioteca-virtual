@@ -1,4 +1,5 @@
 import express, { json } from "express";
+// import path from "path";
 import cors from "cors";
 import {
     getAllBooks,
@@ -22,12 +23,14 @@ import { error } from "console";
 import fs from "fs";
 import fileUpload from "express-fileupload";
 import { livros } from "./DB/structure.js";
+// import path from "path";
 
 const app = express();
-const port = 3000;
+const port = 8000;
 app.use(cors());
 app.use(json());
 app.use(fileUpload());
+// app.use('/images', express.static(path.join(__dirname, 'public/livros/capas')));
 
 app.get("/api/books/searchById/:id", async (req, res) => {
     const id = parseInt(req.params.id);

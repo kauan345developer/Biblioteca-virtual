@@ -1,5 +1,8 @@
 /* eslint-disable no-unused-vars */
-import logo from "../../assets/logoBiblioteca.png";
+// import logo from "../../assets/logoBiblioteca.png";
+
+import logo from "../../assets/LogoBiblioteca.png";
+
 import styles from "./styles.module.scss";
 import searchIcon from "../../assets/icons/search.svg";
 import { Link } from "react-router-dom";

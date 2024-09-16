@@ -1,0 +1,42 @@
+services:
+    postgres:
+        container_name: database
+        ports:
+            - "5431:5432"
+        image: postgres
+        environment:
+            POSTGRES_USER: "${POSTGRES_USER}"
+            POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+            POSTGRES_DB: ${POSTGRES_DB}
+        volumes:
+            - ./docker_test_db:/var/lib/postgresql/data
+        healthcheck:
+            test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+            interval: 5s
+            timeout: 60s
+            retries: 5
+            start_period: 80s
+    biblioteca-server:
+        container_name: biblioteca-server
+        build:
+            context: biblioteca-server
+            dockerfile: Dockerfile
+        ports:
+            - "7999:8000"
+        command: sh -c "npm run createdb && npm run main"
+        environment:
+            DATABASE_URL: "${DATABASE_URL}"
+            PORT: "${SERVER_PORT}"
+        depends_on:
+            postgres:
+                condition: service_healthy
+    biblioteca:
+        container_name: biblioteca
+        build:
+            context: biblioteca
+            dockerfile: Dockerfile
+        command: sh -c "npm run preview"
+        ports:
+            - "4172:4173"
+        depends_on:
+            - biblioteca-server

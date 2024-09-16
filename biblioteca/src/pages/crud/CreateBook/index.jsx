@@ -46,7 +46,7 @@ function CreateBook() {
         };
       });
 
-      const response = await fetch("http://localhost:3000/api/books/cadastro", {
+      const response = await fetch("http://127.0.0.1:7999/api/books/cadastro", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,7 @@ function CreateBook() {
         bookUpload.append("capa", bookFiles.capa[0]);
 
         const upload = await fetch(
-          `http://localhost:3000/api/books/upload/${data.bookId}`,
+          `http://127.0.0.1:7999/api/books/upload/${data.bookId}`,
           {
             method: "POST",
             body: bookUpload,

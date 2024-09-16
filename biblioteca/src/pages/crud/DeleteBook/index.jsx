@@ -6,7 +6,7 @@ function DeleteBook() {
   const deleteBook = async() => {
     try {
       const bookId = document.querySelector('#deleteBookId').value;
-      const response = await fetch(`http://localhost:3000/api/books/delete/${bookId}`, {
+      const response = await fetch(`http://127.0.0.1:7999/api/books/delete/${bookId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

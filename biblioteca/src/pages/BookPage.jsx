@@ -1,18 +1,18 @@
 /* eslint-disable no-unused-vars */
 
-import {Book} from "../components/Book"
+import { Book } from "../components/Book";
 // import imgBook from "../assets/bookCover/livro1.png"
 import { useNavigate, useLocation } from "react-router-dom";
 import { getBookById } from "../apis/api";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 // import image from "../../../biblioteca-server/public/livros/capas/1.png"
 
 function BookPage() {
   const history = useNavigate();
-  
-  const url = useLocation().pathname
-  const id = url.match(/\/(\d+)$/)[1]
-  console.log(id)
+
+  const url = useLocation().pathname;
+  const id = url.match(/\/(\d+)$/)[1];
+  console.log(id);
   const [book, setBook] = useState(null);
 
   useEffect(() => {
@@ -22,50 +22,46 @@ function BookPage() {
         if (response !== null) {
           setBook(response);
         } else {
-          console.log('Livro não encontrado com o ID:', id);
+          console.log("Livro não encontrado com o ID:", id);
         }
       } catch (error) {
-        console.error('Erro ao buscar os livros:', error);
+        console.error("Erro ao buscar os livros:", error);
         history("/");
       }
     };
-    
-  
+
     fetchData();
-  },[id]);
+  }, [id]);
 
-  const [image, setImage] = useState(null);
+  //   const [image, setImage] = useState(null);
 
-useEffect(() => {
-  const loadImage = async () => {
-    try {
-      const img = await import(`../../../biblioteca-server/public/livros/capas/${id}.png`);
-      setImage(img.default);
-    } catch (error) {
-      console.error('Erro ao carregar a imagem:', error);
-    }
-  };
+  // useEffect(() => {
+  //   const loadImage = async () => {
+  //     try {
+  //       const img = await import(`../../../biblioteca-server/public/livros/capas/${id}.png`);
+  //       setImage(img.default);
+  //     } catch (error) {
+  //       console.error('Erro ao carregar a imagem:', error);
+  //     }
+  //   };
 
-  loadImage();
-}, [id]);
+  //   loadImage();
+  // }, [id]);
 
-  return (
-    book ? (
-      <Book
-        imgBook = {image}
-        title = {book.titulo}
-        authors = {book.editora}
-        description = {book.sinopse}
-        bookID= {book.id}
-        disponivel = {book.disponivel}
-      >
-      </Book>
-    ) : (
-      <div>Carregando...</div>
-    )
-  )
+  return book ? (
+    <Book
+      imgBook={
+          `http://127.0.0.1:7999/api/books/capas/${id}.png`
+      }
+      title={book.titulo}
+      authors={book.editora}
+      description={book.sinopse}
+      bookID={book.id}
+      disponivel={book.disponivel}
+    ></Book>
+  ) : (
+    <div>Carregando...</div>
+  );
 }
 
-export {BookPage};
-
-
+export { BookPage };

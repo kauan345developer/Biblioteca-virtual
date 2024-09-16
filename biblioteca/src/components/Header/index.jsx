@@ -92,27 +92,27 @@ function Header() {
         />
         <div className={styles.searchBooks} id="searchD">
           {bookItems.map((book) => {
-            const MeuComponente = () => {
-              const [caminhoDaImagem, setCaminhoDaImagem] = useState(null);
+            // const MeuComponente = () => {
+            //   const [caminhoDaImagem, setCaminhoDaImagem] = useState(null);
 
-              useEffect(() => {
-                import(
-                  `../../../../biblioteca-server/public/livros/capas/${book.id}.png`
-                )
-                  .then((image) => {
-                    setCaminhoDaImagem(image.default);
-                  })
-                  .catch((error) => {
-                    console.error(`Error loading image: ${error}`);
-                  });
-              });
+            //   useEffect(() => {
+            //     import(
+            //       `../../../../biblioteca-server/public/livros/capas/${book.id}.png`
+            //     )
+            //       .then((image) => {
+            //         setCaminhoDaImagem(image.default);
+            //       })
+            //       .catch((error) => {
+            //         console.error(`Error loading image: ${error}`);
+            //       });
+            //   });
 
-              if (!caminhoDaImagem) {
-                return null; // or return a placeholder image
-              }
+            //   if (!caminhoDaImagem) {
+            //     return null; // or return a placeholder image
+            //   }
 
-              return <img src={caminhoDaImagem} alt="Descrição da imagem" />;
-            };
+            //   return <img src={caminhoDaImagem} alt="Descrição da imagem" />;
+            // };
 
             return (
               <Link
@@ -121,8 +121,8 @@ function Header() {
                 key={book.id}
               >
                 <div>
-                  <MeuComponente />
-                  <p>{book.titulo}</p>
+                <img src={`http://127.0.0.1:7999/api/books/capas/${book.id}.png`} alt="" />
+                <p>{book.titulo}</p>
                 </div>
               </Link>
             );
